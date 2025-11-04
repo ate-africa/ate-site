@@ -1,0 +1,393 @@
+<!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Sora:wght@700&amp;display=swap" rel="stylesheet">
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>::-webkit-scrollbar { display: none;}</style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sora': ['Sora', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-red': {
+                            DEFAULT: '#D31414',
+                            'dark': '#A61617',
+                            'tint-1': '#DA3737',
+                            'tint-2': '#E05A5A',
+                            'tint-3': '#EDA1A1',
+                            'shade-1': '#B21919',
+                            'shade-2': '#911F1E',
+                        },
+                        'ink': {
+                            'darkest': '#0E0F12',
+                            'dark': '#141518',
+                        },
+                        'neutral': {
+                            'charcoal': '#2F2F2D',
+                            'graphite': '#594F50',
+                            'ash': '#A4A39E',
+                            'white': '#FFFFFF',
+                        },
+                    },
+                    boxShadow: {
+                        'glow-red': '0 0 40px 0 rgba(224, 90, 90, 0.18)',
+                        'glow-red-lg': '0 0 60px 0 rgba(224, 90, 90, 0.25)',
+                    },
+                    animation: {
+                       'count-up': 'count-up 2s ease-out forwards',
+                       'pulse-faint': 'pulse-faint 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                       'count-up': {
+                            'from': { '--num': 0 },
+                            'to': { '--num': 'var(--target-num)' }
+                        },
+                       'pulse-faint': {
+                            '0%, 100%': { opacity: 1 },
+                            '50%': { opacity: .5 }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(20, 21, 24, 0.5);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .gradient-border {
+            position: relative;
+            border-radius: 28px;
+        }
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 28px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(211, 20, 20, 0.3), rgba(211, 20, 20, 0.1), rgba(211, 20, 20, 0.3));
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+                    mask-composite: exclude;
+        }
+        .hero-bg {
+            background-color: #0E0F12;
+            background-image: 
+                radial-gradient(at 20% 25%, hsla(0, 77%, 60%, 0.20) 0px, transparent 50%),
+                radial-gradient(at 80% 75%, hsla(0, 77%, 60%, 0.15) 0px, transparent 50%);
+        }
+         @property --num {
+          syntax: '<integer>';
+          initial-value: 0;
+          inherits: false;
+        }
+        [data-count-up] {
+          animation: count-up 2s ease-out forwards;
+          counter-reset: num var(--num);
+        }
+        [data-count-up]::after {
+          content: counter(num);
+        }
+    </style>
+</head>
+<body class="bg-ink-darkest font-inter text-neutral-ash antialiased">
+
+    <header id="header" class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50">
+        <nav class="flex items-center justify-between px-6 py-3 bg-ink-dark/50 backdrop-blur-xl rounded-2xl border border-neutral-graphite/30">
+            <a href="#" class="flex items-center gap-2 text-neutral-white font-sora font-bold text-lg">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-brand-red">
+                    <path d="M14.243 2.906a1 1 0 01.757.95v1.288a1 1 0 01-1.85.518l-1.07-2.14a1 1 0 01.406-1.343 1 1 0 011.344.143l.413.584zM12 10a2 2 0 11-4 0 2 2 0 014 0z" fill="currentColor"></path>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35zM12 19l-1.45-1.32C5.4 13.36 3 10.28 3 7.5 3 6.42 3.42 5 4.5 5c1.74 0 3.41.81 4.5 2.09C10.09 5.81 11.76 5 13.5 5c3.08 0 5.5 2.42 5.5 4.5 0 2.78-2.4 5.86-7.55 10.54L12 19z" fill="currentColor" fill-opacity="0.2"></path>
+                </svg>
+                Africa Trade Engine
+            </a>
+            <div class="hidden lg:flex items-center gap-x-8 text-sm font-medium text-neutral-ash">
+                <a href="#" class="hover:text-neutral-white transition-colors duration-200">Home</a>
+                <a href="#" class="hover:text-neutral-white transition-colors duration-200">Platform</a>
+                <a href="#" class="hover:text-neutral-white transition-colors duration-200">Impact</a>
+                <a href="#" class="hover:text-neutral-white transition-colors duration-200">About</a>
+                <a href="#" class="hover:text-neutral-white transition-colors duration-200">Careers</a>
+                <a href="#" class="hover:text-neutral-white transition-colors duration-200">Newsroom</a>
+                <a href="#" class="hover:text-neutral-white transition-colors duration-200">Investors</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="hidden lg:flex items-center gap-2 text-sm text-neutral-graphite border border-neutral-graphite/50 px-3 py-1.5 rounded-lg hover:text-neutral-ash hover:border-neutral-ash/50 transition-colors">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span class="font-mono text-xs">⌘K</span>
+                </button>
+                <a href="#" class="px-5 py-2.5 text-sm font-semibold text-neutral-white bg-brand-red hover:bg-brand-red-dark rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-darkest focus-visible:ring-brand-red-tint-2">
+                    Start a Project
+                </a>
+                <button class="lg:hidden text-neutral-ash hover:text-neutral-white">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section id="hero" class="relative hero-bg h-[900px] flex items-center justify-center text-center overflow-hidden">
+            <div class="absolute inset-0 w-full h-full opacity-30" id="parallax-container">
+                <div class="w-full h-auto max-h-[900px] object-cover">
+                     <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/e9c71f3e45-c9b61169a521b3464ad9.png" alt="ultra-modern, dark theme, subtle 3D wireframe map of Africa with glowing crimson nodes and faint connection lines, on a dark background with a soft aurora glow, minimalist, high-tech, parallax effect">
+                </div>
+            </div>
+            <div class="relative z-10 px-4 max-w-5xl mx-auto">
+                <h1 class="font-sora text-6xl md:text-7xl lg:text-8xl font-bold text-neutral-white leading-tight tracking-tighter">Powering Africa’s Industrial Future.</h1>
+                <p class="mt-6 max-w-3xl mx-auto text-xl text-neutral-ash leading-relaxed">Manufacture, localize, and scale across Africa—production, quality, distribution &amp; cross-border trade in one platform.</p>
+                <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#" class="w-full sm:w-auto px-8 py-4 text-base font-semibold text-neutral-white bg-brand-red hover:bg-brand-red-dark rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-darkest focus-visible:ring-brand-red-tint-2 shadow-glow-red">Start a Project</a>
+                    <a href="#" class="w-full sm:w-auto px-8 py-4 text-base font-semibold text-neutral-white bg-transparent border border-neutral-graphite hover:border-neutral-ash hover:bg-white/5 rounded-full transition-colors duration-200">Book a 20-min Intro</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="persona-chips" class="py-12 bg-ink-darkest">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+                    <button class="px-5 py-2.5 text-sm font-medium bg-neutral-charcoal/50 text-neutral-ash hover:bg-neutral-charcoal hover:text-neutral-white rounded-full transition-colors duration-200">Brand</button>
+                    <button class="px-5 py-2.5 text-sm font-medium bg-neutral-charcoal/50 text-neutral-ash hover:bg-neutral-charcoal hover:text-neutral-white rounded-full transition-colors duration-200">Investor</button>
+                    <button class="px-5 py-2.5 text-sm font-medium bg-neutral-charcoal/50 text-neutral-ash hover:bg-neutral-charcoal hover:text-neutral-white rounded-full transition-colors duration-200">Government</button>
+                    <button class="px-5 py-2.5 text-sm font-medium bg-neutral-charcoal/50 text-neutral-ash hover:bg-neutral-charcoal hover:text-neutral-white rounded-full transition-colors duration-200">Partner</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="bento-proof" class="py-24 bg-ink-darkest">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div id="bento-card-1" class="glass-card gradient-border p-8 rounded-[28px]">
+                        <h3 class="font-sora text-5xl font-bold text-neutral-white">200k+</h3>
+                        <p class="mt-2 text-neutral-ash">retailers in our distribution network.</p>
+                    </div>
+                    <div id="bento-card-2" class="glass-card gradient-border p-8 rounded-[28px]">
+                        <h3 class="font-sora text-5xl font-bold text-neutral-white">ISO</h3>
+                        <p class="mt-2 text-neutral-ash">certified manufacturing facilities.</p>
+                    </div>
+                    <div id="bento-card-3" class="glass-card gradient-border p-8 rounded-[28px]">
+                        <h3 class="font-sora text-5xl font-bold text-neutral-white">SEZ</h3>
+                        <p class="mt-2 text-neutral-ash">&amp; bonded hubs for optimized trade.</p>
+                    </div>
+                    <div id="bento-card-4" class="glass-card gradient-border p-8 rounded-[28px]">
+                        <h3 class="font-sora text-5xl font-bold text-neutral-white">E2E</h3>
+                        <p class="mt-2 text-neutral-ash">visibility across the value chain.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="what-we-do" class="py-24 bg-ink-dark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="font-sora text-5xl font-bold text-neutral-white">What We Do</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div id="service-card-1" class="glass-card gradient-border p-8 rounded-[28px] text-center">
+                        <div class="text-brand-red text-3xl mb-4"><i class="fa-solid fa-industry"></i></div>
+                        <h3 class="font-sora text-2xl font-bold text-neutral-white">Manufacture &amp; Localize</h3>
+                        <p class="mt-3 text-neutral-ash">Near-market production, export packaging, and dramatically reduced lead-times.</p>
+                    </div>
+                    <div id="service-card-2" class="glass-card gradient-border p-8 rounded-[28px] text-center">
+                        <div class="text-brand-red text-3xl mb-4"><i class="fa-solid fa-truck-fast"></i></div>
+                        <h3 class="font-sora text-2xl font-bold text-neutral-white">Market Access &amp; Distribution</h3>
+                        <p class="mt-3 text-neutral-ash">Dark stores, extensive coverage teams, and real-time sell-through tracking.</p>
+                    </div>
+                    <div id="service-card-3" class="glass-card gradient-border p-8 rounded-[28px] text-center">
+                        <div class="text-brand-red text-3xl mb-4"><i class="fa-solid fa-chart-line"></i></div>
+                        <h3 class="font-sora text-2xl font-bold text-neutral-white">Tech, Data &amp; Finance</h3>
+                        <p class="mt-3 text-neutral-ash">Demand forecasting, inventory visibility, and embedded credit solutions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about-ate" class="py-24 bg-ink-darkest">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+        <h2 class="font-sora text-5xl font-bold text-neutral-white">About Us</h2>
+    </div>
+    <div class="prose prose-lg prose-invert max-w-none text-neutral-ash">
+        <p>Africa Trade Engine is a joint venture combining <strong class="text-neutral-white">TRT Manufacturing's</strong> production expertise (manufacturing, quality assurance, export packaging) with <strong class="text-neutral-white">TradeDepot's</strong> technology platform and extensive distributor network across Africa.</p>
+        <p>We bridge the gap between global brands seeking African market access and the continent's manufacturing capabilities, offering <strong class="text-neutral-white">end-to-end execution</strong> from product formulation to retail sell-through.</p>
+        <p>Our integrated approach reduces landed costs, accelerates time-to-market, and provides visibility across the entire value chain—enabling brands to manufacture locally while accessing pan-African distribution networks.</p>
+    </div>
+    <div class="text-center mt-12">
+        <p class="font-sora text-xl text-brand-red font-bold">Made in Africa, for Africa and the world.</p>
+    </div>
+</div>
+</section>
+        
+        <section id="success-stories" class="py-24 bg-ink-dark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="font-sora text-5xl font-bold text-neutral-white">Success Stories</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div id="story-card-1" class="group relative glass-card gradient-border p-8 rounded-[28px] overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-glow-red-lg">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm text-neutral-ash">Unilever / Dove</p>
+                                <h3 class="font-sora text-2xl font-bold text-neutral-white mt-1">Dove Localization</h3>
+                            </div>
+                            <span class="bg-brand-red/10 text-brand-red-tint-2 text-xs font-bold px-3 py-1 rounded-full">30% cost reduction</span>
+                        </div>
+                        <div class="mt-4 text-neutral-ash space-y-2">
+                            <p><strong class="text-neutral-white">Challenge:</strong> High import duties and long supply chains.</p>
+                            <p><strong class="text-neutral-white">ATE Approach:</strong> Localized production in our SA facility.</p>
+                            <p><strong class="text-neutral-white">Outcome:</strong> Reduced landed costs and improved market responsiveness.</p>
+                        </div>
+                        <div class="absolute inset-0 bg-ink-darkest/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <a href="#" class="text-neutral-white font-semibold text-lg">View Case <i class="fa-solid fa-arrow-right ml-2"></i></a>
+                        </div>
+                    </div>
+                    <div id="story-card-2" class="group relative glass-card gradient-border p-8 rounded-[28px] overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-glow-red-lg">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm text-neutral-ash">Prime</p>
+                                <h3 class="font-sora text-2xl font-bold text-neutral-white mt-1">Hydration Scale</h3>
+                            </div>
+                            <span class="bg-brand-red/10 text-brand-red-tint-2 text-xs font-bold px-3 py-1 rounded-full">5× distribution</span>
+                        </div>
+                        <div class="mt-4 text-neutral-ash space-y-2">
+                            <p><strong class="text-neutral-white">Challenge:</strong> Rapid scaling required across multiple markets.</p>
+                            <p><strong class="text-neutral-white">ATE Approach:</strong> Leveraged our dark store network for last-mile.</p>
+                            <p><strong class="text-neutral-white">Outcome:</strong> Quintupled retail presence in 6 months.</p>
+                        </div>
+                         <div class="absolute inset-0 bg-ink-darkest/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <a href="#" class="text-neutral-white font-semibold text-lg">View Case <i class="fa-solid fa-arrow-right ml-2"></i></a>
+                        </div>
+                    </div>
+                    <div id="story-card-3" class="group relative glass-card gradient-border p-8 rounded-[28px] overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-glow-red-lg">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm text-neutral-ash">Nestlé</p>
+                                <h3 class="font-sora text-2xl font-bold text-neutral-white mt-1">Market Entry</h3>
+                            </div>
+                            <span class="bg-brand-red/10 text-brand-red-tint-2 text-xs font-bold px-3 py-1 rounded-full">60% faster TTM</span>
+                        </div>
+                        <div class="mt-4 text-neutral-ash space-y-2">
+                            <p><strong class="text-neutral-white">Challenge:</strong> Navigating complex regulatory hurdles for a new product.</p>
+                            <p><strong class="text-neutral-white">ATE Approach:</strong> End-to-end compliance and logistics management.</p>
+                            <p><strong class="text-neutral-white">Outcome:</strong> Launched in 3 target markets ahead of schedule.</p>
+                        </div>
+                         <div class="absolute inset-0 bg-ink-darkest/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <a href="#" class="text-neutral-white font-semibold text-lg">View Case <i class="fa-solid fa-arrow-right ml-2"></i></a>
+                        </div>
+                    </div>
+                    <div id="story-card-4" class="group relative glass-card gradient-border p-8 rounded-[28px] overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-glow-red-lg">
+                         <div class="flex justify-between items-start">
+                            <div>
+                                <p class="text-sm text-neutral-ash">Mangrove</p>
+                                <h3 class="font-sora text-2xl font-bold text-neutral-white mt-1">Supply Chain</h3>
+                            </div>
+                            <span class="bg-brand-red/10 text-brand-red-tint-2 text-xs font-bold px-3 py-1 rounded-full">40% efficiency</span>
+                        </div>
+                        <div class="mt-4 text-neutral-ash space-y-2">
+                            <p><strong class="text-neutral-white">Challenge:</strong> Fragmented supply chain leading to stockouts.</p>
+                            <p><strong class="text-neutral-white">ATE Approach:</strong> Integrated inventory management via our platform.</p>
+                            <p><strong class="text-neutral-white">Outcome:</strong> Increased inventory turn and reduced stockout rates.</p>
+                        </div>
+                         <div class="absolute inset-0 bg-ink-darkest/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <a href="#" class="text-neutral-white font-semibold text-lg">View Case <i class="fa-solid fa-arrow-right ml-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="final-cta" class="py-24 bg-ink-darkest">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="font-sora text-4xl sm:text-5xl font-bold text-neutral-white">Ready to execute across Africa? Let’s start.</h2>
+                <div class="mt-10">
+                    <a href="#" class="inline-block px-10 py-5 text-lg font-semibold text-neutral-white bg-brand-red hover:bg-brand-red-dark rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-darkest focus-visible:ring-brand-red-tint-2 shadow-glow-red-lg">Start a Project</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer id="footer" class="bg-ink-dark py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="text-sm text-neutral-graphite">© 2025 Africa Trade Engine. All rights reserved.</div>
+                <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-neutral-ash">
+                    <a href="#" class="hover:text-neutral-white transition-colors">Legal</a>
+                    <a href="#" class="hover:text-neutral-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-neutral-white transition-colors">Cookies</a>
+                    <a href="#" class="hover:text-neutral-white transition-colors">Download Brochure</a>
+                    <a href="#" class="hover:text-neutral-white transition-colors">IR Contact</a>
+                </div>
+                <div class="flex items-center gap-6 text-neutral-ash text-lg">
+                    <a href="#" class="hover:text-neutral-white transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#" class="hover:text-neutral-white transition-colors"><i class="fa-regular fa-calendar-check"></i></a>
+                    <a href="#" class="hover:text-neutral-white transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="sticky-dock" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 transition-opacity duration-300 opacity-0 pointer-events-none">
+        <div class="flex items-center gap-2 bg-ink-dark/70 backdrop-blur-xl p-2 rounded-full border border-neutral-graphite/40 shadow-2xl">
+            <a href="#" class="px-5 py-2.5 text-sm font-semibold text-neutral-white bg-brand-red hover:bg-brand-red-dark rounded-full transition-colors duration-200">Start a Project</a>
+            <a href="#" class="px-5 py-2.5 text-sm font-semibold text-neutral-ash hover:text-neutral-white rounded-full transition-colors duration-200">Book Intro</a>
+            <a href="#" class="px-5 py-2.5 text-sm font-semibold text-neutral-ash hover:text-neutral-white rounded-full transition-colors duration-200"><i class="fa-solid fa-download mr-2"></i>Sheet</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Parallax effect for hero background
+            const parallaxContainer = document.getElementById('parallax-container');
+            window.addEventListener('scroll', () => {
+                const offset = window.pageYOffset;
+                if (parallaxContainer) {
+                    parallaxContainer.style.transform = `translateY(${offset * 0.3}px)`;
+                }
+            });
+
+            // Sticky dock visibility
+            const stickyDock = document.getElementById('sticky-dock');
+            const showDockThreshold = window.innerHeight * 0.4;
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > showDockThreshold) {
+                    stickyDock.classList.remove('opacity-0', 'pointer-events-none');
+                } else {
+                    stickyDock.classList.add('opacity-0', 'pointer-events-none');
+                }
+            });
+
+            // Stat count-up animation trigger
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counters = entry.target.querySelectorAll('[data-count-up]');
+                        counters.forEach(counter => {
+                            const target = counter.getAttribute('data-target-num');
+                            counter.style.setProperty('--target-num', target);
+                            counter.classList.add('counting');
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            const bentoSection = document.getElementById('bento-proof');
+            if (bentoSection) {
+                observer.observe(bentoSection);
+            }
+        });
+    </script>
+
+</body></html>
