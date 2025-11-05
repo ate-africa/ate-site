@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Start a Project — Africa Trade Engine</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/logo/ate-logomark.png" />
+  <link rel="apple-touch-icon" href="images/logo/ate-logomark.png" />
+  <link rel="shortcut icon" type="image/png" href="images/logo/ate-logomark.png" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sora: ['Sora','sans-serif'], inter: ['Inter','sans-serif'] },
+          colors: {
+            'brand-red': { DEFAULT:'#D31414', dark:'#A61617', 'tint-2':'#E05A5A' },
+            ink: { darkest:'#0E0F12', dark:'#141518' },
+            neutral: { charcoal:'#2F2F2D', graphite:'#594F50', ash:'#A4A39E', white:'#FFFFFF' },
+          },
+          boxShadow: { 'glow-red':'0 0 40px rgba(224,90,90,.18)', 'glow-red-lg':'0 0 60px rgba(224,90,90,.25)' }
+        }
+      }
+    }
+  </script>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@700&display=swap" rel="stylesheet">
+  <script>window.FontAwesomeConfig={autoReplaceSvg:'nest'};</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <style>
+    ::-webkit-scrollbar { display: none; }
+    html { scroll-behavior: smooth; }
+    section { scroll-margin-top: 110px; }
+
+    .glass-card { background: rgba(20,21,24,.6); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); }
+    .gradient-border { position: relative; border-radius: 28px; }
+    .gradient-border::before {
+      content:''; position:absolute; inset:0; border-radius:28px; padding:1px;
+      background: linear-gradient(135deg, rgba(211,20,20,.3), rgba(211,20,20,.1), rgba(211,20,20,.3));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude; pointer-events:none;
+    }
+    .form-input { background: rgba(14,15,18,.5); border:1px solid #594F50; color:#A4A39E; }
+    .form-input:focus { border-color:#D31414; box-shadow:0 0 0 2px rgba(211,20,20,.3); outline:none; }
+    .form-checkbox:checked { background-color:#D31414; border-color:#D31414; }
+    .step-content { animation: fadeIn .4s ease-out both; }
+    @keyframes fadeIn { from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none} }
+    .error { display:none; color:#E05A5A; font-size:.8rem; margin-top:.35rem; }
+    .has-error .error { display:block; }
+    .has-error .form-input, .has-error .fake-input { border-color:#E05A5A; box-shadow:0 0 0 2px rgba(224,90,90,.2); }
+    .fake-input { background: rgba(14,15,18,.5); border:1px solid #594F50; }
+    .chip { background: rgba(211,20,20,.12); border:1px solid rgba(211,20,20,.35); padding:.25rem .5rem; border-radius:9999px; display:inline-flex; align-items:center; gap:.35rem; }
+
+    .toast { position:fixed; right:18px; bottom:18px; background:#141518; color:#fff; border:1px solid rgba(255,255,255,.08); padding:12px 14px; border-radius:12px; z-index:1000; box-shadow:0 10px 30px rgba(0,0,0,.3); }
+  </style>
+</head>
+<body class="bg-ink-darkest font-inter text-neutral-ash antialiased">
+
+  <!-- Header -->
+  <header id="header" class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50">
+    <nav class="flex items-center justify-between px-6 py-3 bg-ink-dark/50 backdrop-blur-xl rounded-2xl border border-neutral-graphite/30">
+      <a href="index.html#hero" class="flex items-center gap-3 text-neutral-white font-sora font-bold text-lg">
+        <img src="images/logo/ate-logomark-reverse.png" alt="ATE logo" class="h-7 w-7 rounded" />
+        Africa Trade Engine
+      </a>
+      <div class="hidden lg:flex items-center gap-x-8 text-sm font-medium text-neutral-ash">
+        <a href="index.html#hero" class="hover:text-neutral-white">Home</a>
+        <a href="platform.html" class="hover:text-neutral-white">Platform</a>
+        <a href="impact.html" class="hover:text-neutral-white">Impact</a>
+        <a href="about.html" class="hover:text-neutral-white">About</a>
+        <a href="careers.html" class="hover:text-neutral-white">Careers</a>
+        <a href="newsroom.html" class="hover:text-neutral-white">Newsroom</a>
+        <a href="investors.html" class="hover:text-neutral-white">Investors</a>
+      </div>
+      <div class="flex items-center gap-4">
+        <button id="cmdk-btn" class="hidden lg:flex items-center gap-2 text-sm text-neutral-graphite border border-neutral-graphite/50 px-3 py-1.5 rounded-lg hover:text-neutral-ash hover:border-neutral-ash/50">
+          <i class="fa-solid fa-magnifying-glass"></i><span class="font-mono text-xs">⌘K</span>
+        </button>
+        <a href="start-a-project.html" class="px-5 py-2.5 text-sm font-semibold text-neutral-white bg-brand-red hover:bg-brand-red-dark rounded-full">Start a Project</a>
+        <button class="lg:hidden text-neutral-ash hover:text-neutral-white" id="mobile-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+    </nav>
+    <div id="mobile-menu" class="lg:hidden mt-2 hidden w-[95%] mx-auto max-w-7xl">
+      <div class="px-6 py-4 bg-ink-dark/70 backdrop-blur-xl rounded-2xl border border-neutral-graphite/30">
+        <div class="grid grid-cols-2 gap-3 text-sm">
+          <a href="index.html#hero" class="py-2 hover:text-neutral-white">Home</a>
+          <a href="platform.html" class="py-2 hover:text-neutral-white">Platform</a>
+          <a href="impact.html" class="py-2 hover:text-neutral-white">Impact</a>
+          <a href="about.html" class="py-2 hover:text-neutral-white">About</a>
+          <a href="careers.html" class="py-2 hover:text-neutral-white">Careers</a>
+          <a href="newsroom.html" class="py-2 hover:text-neutral-white">Newsroom</a>
+          <a href="investors.html" class="py-2 hover:text-neutral-white">Investors</a>
+          <a href="start-a-project.html" class="py-2 text-neutral-white">Start a Project</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" class="pt-32 pb-24">
+    <section id="project-wizard">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+
+          <!-- Left rail -->
+          <aside class="lg:col-span-1 pt-4">
+            <h1 class="font-sora text-4xl font-bold text-neutral-white leading-tight">Let's build your project scope.</h1>
+            <p class="mt-4 text-neutral-ash leading-relaxed">
+              This wizard captures the essentials for production and market access. Add what you know now — you can always refine later.
+            </p>
+
+            <div class="mt-10 pt-8 border-t border-neutral-graphite/30">
+              <h3 class="font-sora text-lg font-bold text-neutral-white">Trusted & Certified</h3>
+              <p class="mt-2 text-sm text-neutral-ash">Our facilities and processes meet global standards for quality and safety.</p>
+              <div class="mt-6 flex flex-wrap gap-6 items-center">
+                <div class="flex items-center gap-3 text-neutral-ash"><i class="fa-solid fa-award text-2xl text-brand-red"></i><span class="font-medium">ISO 9001</span></div>
+                <div class="flex items-center gap-3 text-neutral-ash"><i class="fa-solid fa-award text-2xl text-brand-red"></i><span class="font-medium">ISO 22716 (GMP)</span></div>
+                <div class="flex items-center gap-3 text-neutral-ash"><i class="fa-solid fa-shield-halved text-2xl text-brand-red"></i><span class="font-medium">Safety Compliance</span></div>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Wizard -->
+          <section id="wizard-form-container" class="lg:col-span-2">
+            <div class="glass-card gradient-border rounded-[28px] p-8 shadow-glow-red relative min-h-[560px]">
+              <div id="wizard-content">
+                <div id="wizard-progress" class="mb-8">
+                  <div class="flex justify-between mb-1">
+                    <span class="text-sm font-medium text-neutral-ash">Step <span id="current-step-text">1</span> of <span id="total-steps-text">7</span></span>
+                    <span class="text-sm font-medium text-neutral-white" id="step-title">Category & Formats</span>
+                  </div>
+                  <div class="w-full bg-neutral-charcoal rounded-full h-1.5">
+                    <div id="progress-bar" class="bg-brand-red h-1.5 rounded-full transition-all duration-500" style="width:14.29%"></div>
+                  </div>
+                </div>
+                <div id="wizard-steps-container"></div>
+              </div>
+
+              <!-- Success pane OVERLAY -->
+              <div id="wizard-success-pane" class="hidden absolute inset-0 p-8 flex items-center justify-center">
+                <div class="max-w-md text-center bg-ink-dark/70 border border-neutral-graphite/50 rounded-2xl p-8 shadow-glow-red" role="status" aria-live="polite" tabindex="-1">
+                  <div class="mx-auto bg-brand-red/10 w-16 h-16 rounded-full flex items-center justify-center">
+                    <i class="fa-solid fa-check text-brand-red text-3xl"></i>
+                  </div>
+                  <h2 class="font-sora text-3xl font-bold text-neutral-white mt-6">
+                    Thank you — your project brief is in.
+                  </h2>
+                  <p class="text-neutral-ash mt-3">
+                    Our team will be in touch within <strong>2 business days</strong>.
+                  </p>
+                  <div class="mt-6 bg-ink-dark p-4 rounded-xl border border-neutral-graphite/50">
+                    <p class="text-sm text-neutral-ash">Confirmation ID:</p>
+                    <p id="confirm-id" class="font-mono text-lg text-neutral-white tracking-wider"></p>
+                  </div>
+                  <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+                    <a id="mailto-link" class="px-4 py-2 rounded-full bg-brand-red text-white hover:bg-brand-red-dark" href="#">Send via Email</a>
+                    <button id="download-json" class="px-4 py-2 rounded-full border border-neutral-graphite hover:border-neutral-ash">Download Brief (JSON)</button>
+                    <a href="index.html#hero" class="px-4 py-2 rounded-full border border-neutral-graphite hover:border-neutral-ash">Back to Home</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Navigation -->
+              <div id="wizard-navigation" class="mt-8 pt-6 border-t border-neutral-graphite/50 flex items-center justify-between">
+                <button id="prev-btn" class="px-6 py-2.5 text-sm font-semibold text-neutral-ash bg-neutral-charcoal/50 hover:bg-neutral-charcoal rounded-full disabled:opacity-50 disabled:cursor-not-allowed">Back</button>
+                <div class="space-x-2">
+                  <button id="next-btn" class="px-6 py-2.5 text-sm font-semibold text-neutral-white bg-brand-red hover:bg-brand-red-dark rounded-full">Next</button>
+                  <button id="submit-btn" class="hidden px-8 py-2.5 text-sm font-semibold text-neutral-white bg-brand-red hover:bg-brand-red-dark rounded-full">Review & Submit</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="footer" class="bg-ink-dark py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="text-sm text-neutral-graphite">© 2025 Africa Trade Engine. All rights reserved.</div>
+        <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-neutral-ash">
+          <a href="legal.html" class="hover:text-neutral-white">Legal</a>
+          <a href="privacy.html" class="hover:text-neutral-white">Privacy Policy</a>
+          <a href="cookies.html" class="hover:text-neutral-white">Cookies</a>
+          <a href="downloads/ATE-brochure.pdf" class="hover:text-neutral-white">Download Brochure</a>
+          <a href="investors.html#contact" class="hover:text-neutral-white">IR Contact</a>
+        </div>
+        <div class="flex items-center gap-6 text-neutral-ash text-lg">
+          <a href="https://wa.me/" target="_blank" rel="noopener" class="hover:text-neutral-white" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="book-intro.html" class="hover:text-neutral-white" aria-label="Book intro"><i class="fa-regular fa-calendar-check"></i></a>
+          <a href="https://www.linkedin.com/company/africa-trade-engine/" target="_blank" rel="noopener" class="hover:text-neutral-white" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ---------- Shell (mobile menu & ⌘K) ----------
+    (function() {
+      const toggleBtn = document.getElementById('mobile-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (toggleBtn && mobileMenu) {
+        toggleBtn.addEventListener('click', () => {
+          const wasHidden = mobileMenu.classList.contains('hidden');
+          mobileMenu.classList.toggle('hidden');
+          toggleBtn.setAttribute('aria-expanded', String(wasHidden));
+          toggleBtn.innerHTML = wasHidden ? '<i class="fa-solid fa-xmark text-xl"></i>' : '<i class="fa-solid fa-bars text-xl"></i>';
+        });
+      }
+      const cmdkBtn = document.getElementById('cmdk-btn');
+      const openPalette = () => {
+        const dest = prompt('Jump to: home, platform, impact, about, contact, investors');
+        if (!dest) return;
+        const map = { home:'index.html#hero', platform:'platform.html', impact:'impact.html', about:'about.html', contact:'start-a-project.html', investors:'investors.html' };
+        if (map[dest.toLowerCase()]) location.href = map[dest.toLowerCase()];
+      };
+      if (cmdkBtn) cmdkBtn.addEventListener('click', openPalette);
+      window.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); openPalette(); }
+      });
+    })();
+
+    // ---------- Wizard ----------
+    document.addEventListener('DOMContentLoaded', () => {
+      const qs  = (s, r=document) => r.querySelector(s);
+      const qsa = (s, r=document) => Array.from(r.querySelectorAll(s));
+      const toast = (msg) => { const t=document.createElement('div'); t.className='toast'; t.textContent=msg; document.body.appendChild(t); setTimeout(()=>{t.style.opacity='0'; t.style.transition='opacity .3s';},3000); setTimeout(()=>t.remove(),3500); };
+
+      const KEY = 'ate_project_brief_v1';
+      const COUNTRIES = ["Nigeria","Ghana","South Africa","Kenya","Egypt","Ethiopia","Morocco","Algeria","Tunisia","Côte d’Ivoire","Senegal","Rwanda","Uganda","Tanzania","Zambia","Zimbabwe","Namibia","Botswana","Benin","Togo","Cameroon","Congo (DRC)","Angola","Mozambique","Mali","Burkina Faso","Niger","Liberia","Sierra Leone","Gambia","Guinea","Guinea-Bissau","Somalia","Sudan","South Sudan","Eritrea","Djibouti","Eswatini","Lesotho","Madagascar","Mauritius","Seychelles","Cape Verde","Central African Republic","Gabon","Equatorial Guinea"];
+
+      const stepsContainer  = qs('#wizard-steps-container');
+      const prevBtn         = qs('#prev-btn');
+      const nextBtn         = qs('#next-btn');
+      const submitBtn       = qs('#submit-btn');
+      const progressBar     = qs('#progress-bar');
+      const currentStepText = qs('#current-step-text');
+      const totalStepsText  = qs('#total-steps-text');
+      const stepTitle       = qs('#step-title');
+      const wizardContent   = qs('#wizard-content');
+      const wizardNav       = qs('#wizard-navigation');
+      const successPane     = qs('#wizard-success-pane');
+
+      let state = {
+        category:'', formats:'',
+        markets:[], startDate:'',
+        volume:'', moq:'',
+        compliance:{ ISO9001:false, GMP:false, Halal:false, Organic:false, other:'' },
+        coverage:'', goals:'',
+        briefFileName:'', nda:false,
+        contact:{ name:'', company:'', email:'', phone:'' }
+      };
+
+      // restore
+      try { const s = localStorage.getItem(KEY); if (s) { const parsed=JSON.parse(s); if (typeof parsed.markets==='string') parsed.markets = parsed.markets.split(',').map(x=>x.trim()).filter(Boolean); state = Object.assign(state, parsed); } } catch(e){}
+
+      // save helpers
+      const save = () => localStorage.setItem(KEY, JSON.stringify(state));
+      const setField = (path, value) => { const parts=path.split('.'); let cur=state; for (let i=0;i<parts.length-1;i++) cur = cur[parts[i]]; cur[parts[parts.length-1]] = value; save(); };
+
+      // URL prefill
+      const params = new URLSearchParams(location.search);
+      if (params.get('category') && !state.category) state.category = params.get('category');
+      if (params.get('markets') && (!state.markets || state.markets.length===0)) state.markets = params.get('markets').split(',').map(s=>s.trim()).filter(Boolean);
+
+      function renderCountries(container, filter=''){
+        container.innerHTML='';
+        COUNTRIES.filter(c=>c.toLowerCase().includes(filter.toLowerCase())).forEach(name=>{
+          const id='c_'+name.replace(/[^a-z0-9]/gi,'_');
+          const row=document.createElement('label');
+          row.className='flex items-center gap-2 p-2 rounded hover:bg-white/5 cursor-pointer';
+          row.innerHTML='\
+            <input type="checkbox" id="'+id+'" class="form-checkbox">\
+            <span>'+name+'</span>';
+          container.appendChild(row);
+          const input=row.querySelector('input');
+          input.checked = state.markets.includes(name);
+          input.addEventListener('change',e=>{
+            if(e.target.checked){ if(!state.markets.includes(name)) state.markets.push(name); }
+            else { state.markets = state.markets.filter(m=>m!==name); }
+            save(); updateChips();
+          });
+        });
+      }
+      function updateChips(){
+        const chips = qs('#selected-chips', stepsContainer);
+        if (!chips) return;
+        chips.innerHTML='';
+        (state.markets||[]).forEach(m=>{
+          const span=document.createElement('span');
+          span.className='chip mr-1 mb-1';
+          span.innerHTML = m+' <button aria-label="Remove '+m+'" class="text-neutral-ash hover:text-white">&times;</button>';
+          span.querySelector('button').addEventListener('click', ()=>{
+            state.markets = state.markets.filter(x=>x!==m); save(); updateChips();
+            const cb = stepsContainer.querySelector('#c_'+m.replace(/[^a-z0-9]/gi,'_')); if (cb) cb.checked=false;
+          });
+          chips.appendChild(span);
+        });
+        const summary = qs('#markets-summary', stepsContainer);
+        if (summary) summary.textContent = state.markets.length ? state.markets.join(', ') : 'Select markets...';
+      }
+
+      const steps = [
+        {
+          title:'Category & Formats',
+          render(){
+            const categories = ['Beauty & Personal Care','Home Care','Food & Beverages','Textiles','Other'];
+            const el=document.createElement('div');
+            el.className='step-content space-y-6';
+            el.innerHTML='\
+              <div class="group">\
+                <label class="block text-sm font-medium text-neutral-white mb-2" for="category">Product Category <span class="text-brand-red">*</span></label>\
+                <select id="category" class="form-input w-full rounded-lg p-3">\
+                  <option value="">Select a category...</option>\
+                  '+categories.map(v=>'\
+                    <option '+(state.category===v?'selected':'')+'>'+v+'</option>').join('')+'\
+                </select>\
+                <div class="error">Please choose a category.</div>\
+              </div>\
+              <div>\
+                <label class="block text-sm font-medium text-neutral-white mb-2" for="formats">Product Formats</label>\
+                <input id="formats" class="form-input w-full rounded-lg p-3" placeholder="e.g., Lotions, soaps, powders, 250ml bottles" value="'+(state.formats||'')+'">\
+                <p class="text-xs text-neutral-graphite mt-1">Separate formats with a comma.</p>\
+              </div>';
+            el.querySelector('#category').addEventListener('change', e=>setField('category', e.target.value));
+            el.querySelector('#formats').addEventListener('input', e=>setField('formats', e.target.value));
+            return el;
+          },
+          validate(root){ const g=root.querySelector('.group'); const ok=!!state.category; g.classList.toggle('has-error',!ok); return ok; }
+        },
+        {
+          title:'Markets & Timeline',
+          render(){
+            const el=document.createElement('div');
+            el.className='step-content space-y-6';
+            el.innerHTML='\
+              <div class="group">\
+                <label class="block text-sm font-medium text-neutral-white mb-2">Target Markets <span class="text-brand-red">*</span></label>\
+                <div class="fake-input rounded-lg p-2 focus-within:ring-2 focus-within:ring-brand-red/40">\
+                  <button id="open-country" type="button" class="w-full text-left px-2 py-2 rounded-lg hover:bg-white/5 flex items-center justify-between">\
+                    <span id="markets-summary" class="truncate">'+(state.markets.length?state.markets.join(', '):'Select markets...')+'</span>\
+                    <i class="fa-solid fa-chevron-down ml-3 text-neutral-ash"></i>\
+                  </button>\
+                  <div id="country-panel" class="hidden mt-2 border border-neutral-graphite/60 rounded-lg p-3 bg-ink-dark">\
+                    <div class="flex items-center gap-2 mb-2">\
+                      <i class="fa-solid fa-magnifying-glass text-neutral-ash"></i>\
+                      <input id="country-filter" class="form-input flex-1 rounded p-2" placeholder="Search countries">\
+                      <button id="clear-select" class="text-xs px-2 py-1 border border-neutral-graphite rounded hover:border-neutral-ash">Clear</button>\
+                    </div>\
+                    <div id="country-list" class="max-h-48 overflow-auto pr-1"></div>\
+                    <div class="mt-2 text-right"><button id="close-country" class="px-3 py-1.5 text-sm rounded-full bg-brand-red hover:bg-brand-red-dark text-white">Done</button></div>\
+                  </div>\
+                </div>\
+                <div class="mt-2" id="selected-chips" aria-live="polite"></div>\
+                <div class="error">Please select at least one market.</div>\
+              </div>\
+              <div>\
+                <label class="block text-sm font-medium text-neutral-white mb-2" for="start-date">Target Start Date</label>\
+                <input type="date" id="start-date" class="form-input w-full rounded-lg p-3" style="color-scheme:dark;" value="'+(state.startDate||'')+'">\
+              </div>';
+            const list=el.querySelector('#country-list'), openBtn=el.querySelector('#open-country'), closeBtn=el.querySelector('#close-country');
+            const clearBtn=el.querySelector('#clear-select'), panel=el.querySelector('#country-panel'), filter=el.querySelector('#country-filter');
+            openBtn.addEventListener('click', ()=>{ panel.classList.toggle('hidden'); renderCountries(list, filter.value||''); });
+            closeBtn.addEventListener('click', ()=>panel.classList.add('hidden'));
+            clearBtn.addEventListener('click', ()=>{ state.markets=[]; save(); renderCountries(list, filter.value||''); updateChips(); });
+            filter.addEventListener('input', ()=>renderCountries(list, filter.value||''));
+            renderCountries(list); updateChips();
+            document.addEventListener('click', (e)=>{ if(!el.contains(e.target) && !panel.classList.contains('hidden')) panel.classList.add('hidden'); });
+            el.querySelector('#start-date').addEventListener('change', e=>setField('startDate', e.target.value));
+            return el;
+          },
+          validate(root){ const g=root.querySelector('.group'); const ok=(state.markets&&state.markets.length>0); g.classList.toggle('has-error',!ok); return ok; }
+        },
+        {
+          title:'Volumes & MOQs',
+          render(){
+            const el=document.createElement('div'); el.className='step-content space-y-6';
+            el.innerHTML='\
+              <div class="group">\
+                <label class="block text-sm font-medium text-neutral-white mb-2" for="volume">Forecast Annual Volume (Units) <span class="text-brand-red">*</span></label>\
+                <input type="number" id="volume" class="form-input w-full rounded-lg p-3" placeholder="e.g., 1000000" value="'+(state.volume||'')+'">\
+                <div class="error">Please enter a positive number.</div>\
+              </div>\
+              <div>\
+                <label class="block text-sm font-medium text-neutral-white mb-2">Are you aware of our Minimum Order Quantities (MOQs)?</label>\
+                <div class="flex gap-4">\
+                  <label class="flex items-center gap-2 p-3 border border-neutral-graphite rounded-lg flex-1 cursor-pointer hover:border-brand-red"><input type="radio" name="moq" value="Yes" '+(state.moq==='Yes'?'checked':'')+'> Yes</label>\
+                  <label class="flex items-center gap-2 p-3 border border-neutral-graphite rounded-lg flex-1 cursor-pointer hover:border-brand-red"><input type="radio" name="moq" value="No" '+(state.moq==='No'?'checked':'')+'> No, please provide info</label>\
+                </div>\
+              </div>';
+            el.querySelector('#volume').addEventListener('input', e=>setField('volume', e.target.value));
+            el.querySelectorAll('input[name="moq"]').forEach(r=>r.addEventListener('change', e=>setField('moq', e.target.value)));
+            return el;
+          },
+          validate(root){ const g=root.querySelector('.group'); const n=Number(state.volume); const ok=n&&n>0; g.classList.toggle('has-error',!ok); return ok; }
+        },
+        {
+          title:'Compliance',
+          render(){
+            const el=document.createElement('div'); el.className='step-content space-y-4';
+            el.innerHTML='\
+              <label class="block text-sm font-medium text-neutral-white mb-2">Required Certifications</label>\
+              <div class="grid grid-cols-2 gap-3">\
+                '+['ISO9001','GMP','Halal','Organic'].map(k=>'\
+                  <label class="flex items-center gap-2 p-3 border border-neutral-graphite rounded-lg cursor-pointer hover:border-brand-red">\
+                    <input type="checkbox" data-key="'+k+'" '+(state.compliance[k]?'checked':'')+'> '+k.replace('ISO','ISO ')+'\
+                  </label>').join('')+'\
+              </div>\
+              <input id="other-comp" class="form-input w-full rounded-lg p-3 mt-2" placeholder="Other certifications..." value="'+(state.compliance.other||'')+'">';
+            el.querySelectorAll('input[type="checkbox"]').forEach(cb=>cb.addEventListener('change',e=>setField('compliance.'+e.target.dataset.key, e.target.checked)));
+            el.querySelector('#other-comp').addEventListener('input', e=>setField('compliance.other', e.target.value));
+            return el;
+          },
+          validate(){ return true; }
+        },
+        {
+          title:'Distribution',
+          render(){
+            const el=document.createElement('div'); el.className='step-content space-y-6';
+            el.innerHTML='\
+              <div>\
+                <label class="block text-sm font-medium text-neutral-white mb-2" for="coverage">Desired Distribution Coverage</label>\
+                <select id="coverage" class="form-input w-full rounded-lg p-3">\
+                  <option value="">Select coverage level...</option>\
+                  <option '+(state.coverage==='National (Single Market)'?'selected':'')+'>National (Single Market)</option>\
+                  <option '+(state.coverage==='Regional (e.g., West Africa)'?'selected':'')+'>Regional (e.g., West Africa)</option>\
+                  <option '+(state.coverage==='Pan-African'?'selected':'')+'>Pan-African</option>\
+                </select>\
+              </div>\
+              <div>\
+                <label class="block text-sm font-medium text-neutral-white mb-2" for="goals">Key Sell-Through Goals</label>\
+                <textarea id="goals" class="form-input w-full rounded-lg p-3 h-24" placeholder="e.g., 80% retail availability in key urban centers within 6 months.">'+(state.goals||'')+'</textarea>\
+              </div>';
+            el.querySelector('#coverage').addEventListener('change', e=>setField('coverage', e.target.value));
+            el.querySelector('#goals').addEventListener('input', e=>setField('goals', e.target.value));
+            return el;
+          },
+          validate(){ return true; }
+        },
+        {
+          title:'Brief, Contact & NDA',
+          render(){
+            const el=document.createElement('div'); el.className='step-content space-y-6';
+            el.innerHTML='\
+              <div>\
+                <label class="block text-sm font-medium text-neutral-white mb-2">Upload Project Brief (Optional)</label>\
+                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-neutral-graphite border-dashed rounded-md">\
+                  <div class="space-y-1 text-center">\
+                    <i class="fa-solid fa-cloud-arrow-up text-4xl text-neutral-graphite"></i>\
+                    <div class="flex text-sm text-neutral-ash">\
+                      <label for="file-upload" class="relative cursor-pointer bg-ink-darkest rounded-md font-medium text-brand-red hover:text-brand-red-dark">\
+                        <span>Upload a file</span>\
+                        <input id="file-upload" type="file" class="sr-only">\
+                      </label>\
+                      <p class="pl-1">or drag and drop</p>\
+                    </div>\
+                    <p class="text-xs text-neutral-graphite">PDF, DOCX, PPTX up to 10MB</p>\
+                    <p id="file-name" class="text-xs text-neutral-ash mt-2">'+(state.briefFileName||'')+'</p>\
+                  </div>\
+                </div>\
+              </div>\
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">\
+                <div class="group">\
+                  <label class="block text-sm font-medium text-neutral-white mb-2" for="name">Your Name <span class="text-brand-red">*</span></label>\
+                  <input id="name" class="form-input w-full rounded-lg p-3" value="'+(state.contact.name||'')+'">\
+                  <div class="error">Please enter your name.</div>\
+                </div>\
+                <div>\
+                  <label class="block text-sm font-medium text-neutral-white mb-2" for="company">Company</label>\
+                  <input id="company" class="form-input w-full rounded-lg p-3" value="'+(state.contact.company||'')+'">\
+                </div>\
+                <div class="group md:col-span-2">\
+                  <label class="block text-sm font-medium text-neutral-white mb-2" for="email">Work Email <span class="text-brand-red">*</span></label>\
+                  <input id="email" class="form-input w-full rounded-lg p-3" value="'+(state.contact.email||'')+'">\
+                  <div class="error">Please provide a valid email.</div>\
+                </div>\
+                <div class="md:col-span-2">\
+                  <label class="block text-sm font-medium text-neutral-white mb-2" for="phone">Phone (optional)</label>\
+                  <input id="phone" class="form-input w-full rounded-lg p-3" value="'+(state.contact.phone||'')+'">\
+                </div>\
+              </div>\
+              <label class="flex items-start gap-3">\
+                <input id="nda" type="checkbox" '+(state.nda?'checked':'')+' class="form-checkbox h-4 w-4 rounded mt-1">\
+                <span>I require an NDA before sharing detailed information.</span>\
+              </label>';
+            el.querySelector('#file-upload').addEventListener('change', e=>{ const f=e.target.files[0]; if(!f) return; setField('briefFileName', f.name); el.querySelector('#file-name').textContent=f.name; });
+            el.querySelector('#name').addEventListener('input', e=>setField('contact.name', e.target.value));
+            el.querySelector('#company').addEventListener('input', e=>setField('contact.company', e.target.value));
+            el.querySelector('#email').addEventListener('input', e=>setField('contact.email', e.target.value));
+            el.querySelector('#phone').addEventListener('input', e=>setField('contact.phone', e.target.value));
+            el.querySelector('#nda').addEventListener('change', e=>setField('nda', e.target.checked));
+            return el;
+          },
+          validate(root){
+            let ok=true; const nameG=root.querySelector('#name').parentElement; const emailG=root.querySelector('#email').parentElement;
+            if(!state.contact.name.trim()){ nameG.classList.add('has-error'); ok=false; } else { nameG.classList.remove('has-error'); }
+            const emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.contact.email||'');
+            if(!emailOk){ emailG.classList.add('has-error'); ok=false; } else { emailG.classList.remove('has-error'); }
+            return ok;
+          }
+        },
+        {
+          title:'Review & Submit',
+          render(){
+            const el=document.createElement('div'); el.className='step-content space-y-4';
+            const certList = Object.entries(state.compliance).filter(([k,v])=>k!=='other'&&v).map(([k])=>k.replace('ISO','ISO ')).join(', ') || '—';
+            const other=state.compliance.other ? ', '+state.compliance.other : '';
+            el.innerHTML='\
+              <h3 class="font-sora text-xl font-bold text-neutral-white">Review your details</h3>\
+              <div class="bg-ink-dark p-4 rounded-lg border border-neutral-graphite/50 space-y-2 text-sm">\
+                <p><span class="text-neutral-ash">Category:</span> <span class="text-neutral-white">'+(state.category||'—')+'</span></p>\
+                <p><span class="text-neutral-ash">Formats:</span> <span class="text-neutral-white">'+(state.formats||'—')+'</span></p>\
+                <p><span class="text-neutral-ash">Markets:</span> <span class="text-neutral-white">'+((state.markets||[]).join(', ')||'—')+'</span></p>\
+                <p><span class="text-neutral-ash">Start Date:</span> <span class="text-neutral-white">'+(state.startDate||'—')+'</span></p>\
+                <p><span class="text-neutral-ash">Volume (annual units):</span> <span class="text-neutral-white">'+(state.volume||'—')+'</span></p>\
+                <p><span class="text-neutral-ash">MOQ awareness:</span> <span class="text-neutral-white">'+(state.moq||'—')+'</span></p>\
+                <p><span class="text-neutral-ash">Compliance:</span> <span class="text-neutral-white">'+(certList+other)+'</span></p>\
+                <p><span class="text-neutral-ash">Coverage:</span> <span class="text-neutral-white">'+(state.coverage||'—')+'</span></p>\
+                <p><span class="text-neutral-ash">Goals:</span> <span class="text-neutral-white">'+(state.goals||'—')+'</span></p>\
+                <p><span class="text-neutral-ash">Brief file:</span> <span class="text-neutral-white">'+(state.briefFileName||'—')+'</span></p>\
+                <p><span class="text-neutral-ash">NDA requested:</span> <span class="text-neutral-white">'+(state.nda?'Yes':'No')+'</span></p>\
+                <p><span class="text-neutral-ash">Contact:</span> <span class="text-neutral-white">'+(state.contact.name||'—')+', '+(state.contact.company||'—')+'</span></p>\
+                <p><span class="text-neutral-ash">Email / Phone:</span> <span class="text-neutral-white">'+(state.contact.email||'—')+(state.contact.phone?' • '+state.contact.phone:'')+'</span></p>\
+              </div>\
+              <div class="flex flex-wrap gap-3 pt-2">\
+                <button id="copy-summary" class="px-4 py-2 rounded-full border border-neutral-graphite hover:border-neutral-ash">Copy Summary</button>\
+                <button id="reset-form" class="px-4 py-2 rounded-full border border-neutral-graphite hover:border-neutral-ash">Reset</button>\
+              </div>\
+              <p class="text-xs text-neutral-graphite pt-2">By submitting, you agree to our Legal and Privacy Policy.</p>';
+            el.querySelector('#copy-summary').addEventListener('click', ()=>{ const lines=Array.from(el.querySelectorAll('.bg-ink-dark p')).map(p=>p.textContent.trim()).join('\n'); navigator.clipboard.writeText(lines).then(()=>toast('Summary copied.')); });
+            el.querySelector('#reset-form').addEventListener('click', ()=>{ localStorage.removeItem(KEY); location.reload(); });
+            return el;
+          },
+          validate(){ return true; }
+        }
+      ];
+      totalStepsText.textContent = String(steps.length);
+
+      let currentStep = 0;
+      function renderStep(){
+        stepsContainer.innerHTML=''; stepsContainer.appendChild(steps[currentStep].render());
+        progressBar.style.width = ((currentStep+1)/steps.length*100)+'%';
+        currentStepText.textContent = currentStep+1;
+        stepTitle.textContent = steps[currentStep].title;
+        prevBtn.disabled = currentStep===0;
+        nextBtn.classList.toggle('hidden', currentStep===steps.length-1);
+        submitBtn.classList.toggle('hidden', currentStep!==steps.length-1);
+      }
+      prevBtn.addEventListener('click', ()=>{ if(currentStep>0){ currentStep--; renderStep(); } });
+      nextBtn.addEventListener('click', ()=>{
+        const root=stepsContainer.firstElementChild;
+        if(steps[currentStep].validate && !steps[currentStep].validate(root)) { toast('Please complete the required fields.'); return; }
+        if(currentStep<steps.length-1){ currentStep++; renderStep(); }
+      });
+
+      function genId(){ const d=new Date(); const id='ATE-'+d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'-'+Math.random().toString(36).slice(2,8).toUpperCase(); return id; }
+      submitBtn.addEventListener('click', ()=>{
+        const root=stepsContainer.firstElementChild;
+        if(steps[currentStep].validate && !steps[currentStep].validate(root)) { toast('Please review your details.'); return; }
+
+        const id = genId();
+        document.getElementById('confirm-id').textContent = id;
+
+        // configure mailto + download
+        const mailto = document.getElementById('mailto-link');
+        if (mailto) {
+          const subject = encodeURIComponent('Project Brief '+id);
+          const body = encodeURIComponent(JSON.stringify(state, null, 2));
+          mailto.href = 'mailto:hello@ate.africa?subject='+subject+'&body='+body;
+        }
+        const dl = document.getElementById('download-json');
+        if (dl) {
+          dl.onclick = () => {
+            const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a'); a.href=url; a.download='ATE-project-brief-'+id+'.json'; document.body.appendChild(a); a.click(); a.remove();
+            setTimeout(()=>URL.revokeObjectURL(url), 500);
+          };
+        }
+
+        // Swap views (overlay centered in the card)
+        wizardContent.classList.add('hidden');
+        wizardNav.classList.add('hidden');
+        successPane.classList.remove('hidden');
+        successPane.scrollIntoView({behavior:'smooth', block:'center'});
+        const statusEl = successPane.querySelector('[role="status"]'); if (statusEl) statusEl.focus();
+
+        toast('Submitted! Confirmation: '+id);
+      });
+
+      renderStep();
+    });
+  </script>
+</body>
+</html>
