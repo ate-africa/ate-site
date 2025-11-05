@@ -4,50 +4,285 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Impact — Africa Trade Engine</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/logo/ate-logomark.png" />
+  <link rel="apple-touch-icon" href="images/logo/ate-logomark.png" />
+  <link rel="shortcut icon" type="image/png" href="images/logo/ate-logomark.png" />
+
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="icon" type="image/png" href="images/logo/ate-logomark-reverse.png" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sora:['Sora','sans-serif'], inter:['Inter','sans-serif'] },
+          colors: {
+            'brand-red': { DEFAULT:'#D31414', dark:'#A61617', 'tint-2':'#E05A5A' },
+            ink: { darkest:'#0E0F12', dark:'#141518' },
+            neutral: { charcoal:'#2F2F2D', graphite:'#594F50', ash:'#A4A39E', white:'#FFFFFF' },
+          },
+          boxShadow: { 'glow-red':'0 0 40px rgba(224,90,90,.18)', 'glow-red-lg':'0 0 60px rgba(224,90,90,.25)' },
+        }
+      }
+    }
+  </script>
+
+  <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@700&display=swap" rel="stylesheet">
-  <style>html{scroll-behavior:smooth}</style>
+  <script>window.FontAwesomeConfig={autoReplaceSvg:'nest'};</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <style>
+    ::-webkit-scrollbar { display: none; }
+    html { scroll-behavior: smooth; }
+    section { scroll-margin-top: 110px; }
+
+    .hero-bg-impact {
+      background-color: #0E0F12;
+      background-image:
+        radial-gradient(at 10% 90%, hsla(0,77%,60%,.15) 0px, transparent 50%),
+        radial-gradient(at 90% 10%, hsla(0,77%,60%,.10) 0px, transparent 50%);
+    }
+    .kpi-block { transition: transform .2s ease, box-shadow .2s ease; }
+    .kpi-block:hover { transform: translateY(-8px); box-shadow: 0 20px 45px -10px rgba(211,20,20,.20); }
+  </style>
 </head>
-<body class="bg-[#0E0F12] text-[#A4A39E] font-[Inter]">
-  <header class="sticky top-0 z-50 bg-[#141518]/80 backdrop-blur border-b border-[#594F50]/30">
-    <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-3">
-      <a href="index.html" class="flex items-center gap-3 text-white font-[Sora] font-bold">
-        <img src="images/logo/ate-logomark-reverse.png" alt="ATE logo" class="h-7 w-7 rounded" />
+<body class="bg-ink-darkest font-inter text-neutral-ash antialiased">
+
+  <!-- Header -->
+  <header id="header" class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50">
+    <nav class="flex items-center justify-between px-6 py-3 bg-ink-dark/50 backdrop-blur-xl rounded-2xl border border-neutral-graphite/30">
+      <a href="index.html#hero" class="flex items-center gap-3 text-neutral-white font-sora font-bold text-lg">
+        <img src="images/logo/ate-logomark-reverse.png" class="h-7 w-7 rounded" alt="ATE logo" />
         Africa Trade Engine
       </a>
-      <nav class="hidden md:flex items-center gap-6 text-sm">
-        <a class="hover:text-white" href="platform.html">Platform</a>
-        <a class="hover:text-white" href="impact.html">Impact</a>
-        <a class="hover:text-white" href="about.html">About</a>
-        <a class="hover:text-white" href="careers.html">Careers</a>
-        <a class="hover:text-white" href="newsroom.html">Newsroom</a>
-        <a class="hover:text-white" href="investors.html">Investors</a>
-      </nav>
-      <a href="start-a-project.html" class="hidden md:inline-block bg-[#D31414] hover:bg-[#A61617] text-white text-sm px-4 py-2 rounded-full">Start a Project</a>
+      <div class="hidden lg:flex items-center gap-x-8 text-sm font-medium text-neutral-ash">
+        <a href="index.html#hero" class="hover:text-neutral-white">Home</a>
+        <a href="platform.html" class="hover:text-neutral-white">Platform</a>
+        <a href="impact.html" aria-current="page" class="text-neutral-white font-semibold">Impact</a>
+        <a href="about.html" class="hover:text-neutral-white">About</a>
+        <a href="careers.html" class="hover:text-neutral-white">Careers</a>
+        <a href="newsroom.html" class="hover:text-neutral-white">Newsroom</a>
+        <a href="investors.html" class="hover:text-neutral-white">Investors</a>
+      </div>
+      <div class="flex items-center gap-4">
+        <button id="cmdk-btn" class="hidden lg:flex items-center gap-2 text-sm text-neutral-graphite border border-neutral-graphite/50 px-3 py-1.5 rounded-lg hover:text-neutral-ash hover:border-neutral-ash/50">
+          <i class="fa-solid fa-magnifying-glass"></i><span class="font-mono text-xs">⌘K</span>
+        </button>
+        <a href="start-a-project.html" class="px-5 py-2.5 text-sm font-semibold text-neutral-white bg-brand-red hover:bg-brand-red-dark rounded-full">Start a Project</a>
+        <button class="lg:hidden text-neutral-ash hover:text-neutral-white" id="mobile-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+    </nav>
+    <div id="mobile-menu" class="lg:hidden mt-2 hidden w-[95%] mx-auto max-w-7xl">
+      <div class="px-6 py-4 bg-ink-dark/70 backdrop-blur-xl rounded-2xl border border-neutral-graphite/30">
+        <div class="grid grid-cols-2 gap-3 text-sm">
+          <a href="index.html#hero" class="py-2 hover:text-neutral-white">Home</a>
+          <a href="platform.html" class="py-2 hover:text-neutral-white">Platform</a>
+          <a href="impact.html" class="py-2 text-neutral-white">Impact</a>
+          <a href="about.html" class="py-2 hover:text-neutral-white">About</a>
+          <a href="careers.html" class="py-2 hover:text-neutral-white">Careers</a>
+          <a href="newsroom.html" class="py-2 hover:text-neutral-white">Newsroom</a>
+          <a href="investors.html" class="py-2 hover:text-neutral-white">Investors</a>
+          <a href="start-a-project.html" class="py-2 text-neutral-white">Start a Project</a>
+        </div>
+      </div>
     </div>
   </header>
 
-  <main class="max-w-6xl mx-auto px-6 py-16 md:py-24">
-    <h1 class="text-white font-[Sora] text-4xl md:text-5xl font-bold mb-6">Impact</h1>
-    <p class="max-w-3xl">Quantifiable ESG and growth impact. Example metric cards and case outcomes will live here.</p>
-    <div class="mt-10 p-4 rounded-xl border border-[#594F50]/30 bg-white/5">
-      <p class="text-sm">This is a starter stub so links resolve. Replace with your designed content.</p>
-    </div>
+  <main id="main-content">
+    <!-- Hero -->
+    <section id="impact-hero" class="relative hero-bg-impact h-[520px] flex items-center justify-center text-center overflow-hidden pt-24">
+      <div class="relative z-10 px-4 max-w-5xl mx-auto">
+        <h1 class="font-sora text-5xl md:text-6xl font-bold text-neutral-white leading-tight tracking-tight">
+          From Import Dependency to Local Prosperity.
+        </h1>
+        <p class="mt-4 max-w-3xl mx-auto text-xl text-neutral-ash leading-relaxed">Measurable Impact at Scale.</p>
+      </div>
+    </section>
+
+    <!-- KPIs -->
+    <section id="kpi-metrics" class="py-24 bg-ink-darkest">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+          <article class="bg-brand-red rounded-3xl p-8 md:p-10 kpi-block">
+            <div class="flex flex-col h-full">
+              <div>
+                <div class="inline-flex items-baseline gap-3 mt-1">
+                  <p class="font-sora text-6xl md:text-7xl font-bold text-neutral-white"><span class="kpi" data-target="250000" data-format="int">0</span></p>
+                  <span class="font-sora text-3xl md:text-4xl font-bold text-neutral-white opacity-90 whitespace-nowrap">tonnes</span>
+                </div>
+                <h2 class="font-sora text-2xl font-bold text-white mt-4">CO₂ saved / year</h2>
+              </div>
+              <div class="mt-6 pt-6 border-t border-white/20 flex-grow">
+                <p class="text-white/80 leading-relaxed">
+                  Localising just 20% of imported personal-care &amp; home-care volumes saves ~250,000 tonnes annually—equivalent to taking
+                  <strong class="text-white font-semibold">55,000 cars</strong> off the road.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="bg-brand-red rounded-3xl p-8 md:p-10 kpi-block">
+            <div class="flex flex-col h-full">
+              <div>
+                <div class="inline-flex items-baseline gap-3 mt-1">
+                  <p class="font-sora text-6xl md:text-7xl font-bold text-neutral-white"><span class="kpi" data-target="12000" data-format="int">0</span></p>
+                  <span class="font-sora text-5xl md:text-6xl font-bold text-neutral-white leading-none whitespace-nowrap">+</span>
+                </div>
+                <h2 class="font-sora text-2xl font-bold text-white mt-4">Jobs created (24 months)</h2>
+              </div>
+              <div class="mt-6 pt-6 border-t border-white/20 flex-grow">
+                <p class="text-white/80 leading-relaxed">
+                  South &amp; West African facilities generate 12,000+ livelihoods; <strong class="text-white font-semibold">60% youth</strong>,
+                  <strong class="text-white font-semibold">45% women</strong>. Each node <strong class="text-white font-semibold">600–800</strong> workers;
+                  <strong class="text-white font-semibold">5,000–6,000</strong> indirect jobs.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="bg-brand-red rounded-3xl p-8 md:p-10 kpi-block">
+            <div class="flex flex-col h-full">
+              <div>
+                <p class="font-sora text-6xl md:text-7xl font-bold text-neutral-white">$2 billion</p>
+                <h2 class="font-sora text-2xl font-bold text-white mt-4">Value retained (5-year)</h2>
+              </div>
+              <div class="mt-6 pt-6 border-t border-white/20 flex-grow">
+                <p class="text-white/80 leading-relaxed">
+                  The localisation pipeline keeps ~$2B on the continent over five years, with up to <strong class="text-white font-semibold">30% cost reduction</strong>
+                  for distributors and faster payment cycles.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="bg-brand-red rounded-3xl p-8 md:p-10 kpi-block">
+            <div class="flex flex-col h-full">
+              <div>
+                <p class="font-sora text-6xl md:text-7xl font-bold text-neutral-white">
+                  <span class="kpi" data-target="600000" data-format="int">0</span>
+                </p>
+                <h2 class="font-sora text-2xl font-bold text-white mt-4">SMEs platformed</h2>
+              </div>
+              <div class="mt-6 pt-6 border-t border-white/20 flex-grow">
+                <p class="text-white/80 leading-relaxed">
+                  Integrates 600,000 SMEs into regional trade; <strong class="text-white font-semibold">40%</strong> of suppliers SME-owned;
+                  majority within <strong class="text-white font-semibold">250 km</strong> of each plant.
+                </p>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="impact-cta" class="py-24 bg-ink-dark">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="font-sora text-4xl sm:text-5xl font-bold text-neutral-white">Drive sustainable growth with us.</h2>
+        <p class="mt-4 max-w-2xl mx-auto text-lg text-neutral-ash">
+          Our model creates shared value by building local capacity and strengthening regional economies.
+          Let's discuss how we can partner to scale your impact.
+        </p>
+        <div class="mt-10">
+          <a href="start-a-project.html?ref=impact#project-wizard"
+             class="inline-block px-10 py-5 text-lg font-semibold text-neutral-white bg-brand-red hover:bg-brand-red-dark rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-dark focus-visible:ring-brand-red-tint-2 shadow-glow-red-lg">
+            Discuss Programmatic Partnerships
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="border-t border-[#594F50]/30 py-10">
-    <div class="max-w-6xl mx-auto px-6 text-sm flex flex-col md:flex-row items-center justify-between gap-6">
-      <div>© 2025 Africa Trade Engine. All rights reserved.</div>
-      <div class="flex flex-wrap gap-4">
-        <a class="hover:text-white" href="legal.html">Legal</a>
-        <a class="hover:text-white" href="privacy.html">Privacy Policy</a>
-        <a class="hover:text-white" href="cookies.html">Cookies</a>
-        <a class="hover:text-white" href="downloads/ATE-brochure.pdf">Download Brochure</a>
+  <!-- Footer -->
+  <footer id="footer" class="bg-ink-darkest py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="text-sm text-neutral-graphite">© 2025 Africa Trade Engine. All rights reserved.</div>
+        <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-neutral-ash">
+          <a href="legal.html" class="hover:text-neutral-white">Legal</a>
+          <a href="privacy.html" class="hover:text-neutral-white">Privacy Policy</a>
+          <a href="cookies.html" class="hover:text-neutral-white">Cookies</a>
+          <a href="downloads/ATE-brochure.pdf" class="hover:text-neutral-white">Download Brochure</a>
+          <a href="investors.html#contact" class="hover:text-neutral-white">IR Contact</a>
+        </div>
+        <div class="flex items-center gap-6 text-neutral-ash text-lg">
+          <a href="https://wa.me/" target="_blank" rel="noopener" class="hover:text-neutral-white" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="book-intro.html" class="hover:text-neutral-white" aria-label="Book intro"><i class="fa-regular fa-calendar-check"></i></a>
+          <a href="https://www.linkedin.com/company/africa-trade-engine/" target="_blank" rel="noopener" class="hover:text-neutral-white" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
       </div>
     </div>
   </footer>
+
+  <script>
+    // Shell: mobile menu + ⌘K
+    (function() {
+      const toggleBtn = document.getElementById('mobile-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (toggleBtn && mobileMenu) {
+        toggleBtn.addEventListener('click', () => {
+          const wasHidden = mobileMenu.classList.contains('hidden');
+          mobileMenu.classList.toggle('hidden');
+          toggleBtn.setAttribute('aria-expanded', String(wasHidden));
+          toggleBtn.innerHTML = wasHidden ? '<i class="fa-solid fa-xmark text-xl"></i>' : '<i class="fa-solid fa-bars text-xl"></i>';
+        });
+      }
+      const cmdkBtn = document.getElementById('cmdk-btn');
+      const openPalette = () => {
+        const dest = prompt('Jump to: home, platform, impact, about, contact, investors');
+        if (!dest) return;
+        const map = { home:'index.html#hero', platform:'platform.html', impact:'impact.html', about:'about.html', contact:'start-a-project.html', investors:'investors.html' };
+        if (map[dest.toLowerCase()]) location.href = map[dest.toLowerCase()];
+      };
+      if (cmdkBtn) cmdkBtn.addEventListener('click', openPalette);
+      window.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); openPalette(); }
+      });
+    })();
+
+    // KPI Count-up once visible
+    document.addEventListener('DOMContentLoaded', () => {
+      const formatters = {
+        int: new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 }),
+      };
+      const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+      function animateValue(el, to, duration, format='int') {
+        const start = 0;
+        const startTime = performance.now();
+        function frame(now) {
+          const p = Math.min(1, (now - startTime) / duration);
+          const val = Math.round(start + (to - start) * easeOutCubic(p));
+          el.textContent = formatters[format] ? formatters[format].format(val) : String(val);
+          if (p < 1) requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.querySelectorAll('.kpi[data-target]').forEach(el => {
+              const to = Number(el.getAttribute('data-target')) || 0;
+              const fmt = el.getAttribute('data-format') || 'int';
+              animateValue(el, to, 1600, fmt);
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      const kpiSection = document.getElementById('kpi-metrics');
+      if (kpiSection) observer.observe(kpiSection);
+    });
+  </script>
 </body>
 </html>

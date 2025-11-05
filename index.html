@@ -64,12 +64,26 @@
     }
     [data-count-up] {
       animation: count-up 2s ease-out forwards;
-      counter-reset: num var(--num);
+      counter-set: num var(--num);
     }
-    [data-count-up]::after {
-      content: counter(num);
-    }
-  </style>
+    [data-count-up]::after{content:none!important}
+  
+/* Count-up animation: CSS Houdini + keyframes */
+@property --num {
+  syntax: '<integer>';
+  initial-value: 0;
+  inherits: false;
+}
+@keyframes count-up {
+  from { --num: 0; }
+  to   { --num: var(--target-num); }
+}
+[data-count-up]{
+  animation: count-up 1.2s ease-out forwards;
+  counter-set: num var(--num);
+}
+[data-count-up]::after{content:none!important}
+</style>
 
   <script>
     tailwind.config = {
@@ -332,7 +346,7 @@
           <div id="story-card-3" class="group relative glass-card gradient-border p-8 rounded-[28px] overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-glow-red-lg">
             <div class="flex justify-between items-start">
               <div>
-                <p class="text-sm text-neutral-ash">Nestlé</p>
+                <p class="text-sm text-neutral-ash">Mangrove</p>
                 <h3 class="font-sora text-2xl font-bold text-neutral-white mt-1">Market Entry</h3>
               </div>
               <span class="bg-brand-red/10 text-brand-red-tint-2 text-xs font-bold px-3 py-1 rounded-full">60% faster TTM</span>
@@ -350,7 +364,7 @@
           <div id="story-card-4" class="group relative glass-card gradient-border p-8 rounded-[28px] overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-glow-red-lg">
             <div class="flex justify-between items-start">
               <div>
-                <p class="text-sm text-neutral-ash">Mangrove</p>
+                <p class="text-sm text-neutral-ash">Nestlé</p>
                 <h3 class="font-sora text-2xl font-bold text-neutral-white mt-1">Supply Chain</h3>
               </div>
               <span class="bg-brand-red/10 text-brand-red-tint-2 text-xs font-bold px-3 py-1 rounded-full">40% efficiency</span>
@@ -491,5 +505,49 @@
       });
     });
   </script>
+
+<script>
+// Robust JS counter (no CSS Houdini). Works everywhere.
+(function () {
+  function animate(el, to, opts) {
+    var start = 0, startTs = null, dur = (opts && opts.duration) || 1200;
+    var format = (opts && opts.format) || 'int';
+    var suffix = (opts && opts.suffix) || '';
+    var formatter = new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 });
+    function fmt(v) {
+      if (format === 'abbr-k') return Math.round(v/1000).toLocaleString() + 'k' + suffix;
+      return formatter.format(v) + suffix;
+    }
+    function step(ts) {
+      if (!startTs) startTs = ts;
+      var p = Math.min(1, (ts - startTs) / dur);
+      var eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+      var val = Math.round(start + (to - start) * eased);
+      el.textContent = fmt(val);
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  function run() {
+    document.querySelectorAll('[data-count-up]').forEach(function(el){
+      var to = parseInt(el.getAttribute('data-target-num') || '0', 10);
+      var format = el.getAttribute('data-format') || 'int'; // 'int' | 'abbr-k'
+      var suffix = el.getAttribute('data-suffix') || '';
+      // initialize
+      el.textContent = (format === 'abbr-k') ? '0k' + suffix : '0' + suffix;
+      animate(el, to, { duration: 1400, format: format, suffix: suffix });
+    });
+  }
+  // Trigger when section is visible, else immediately
+  var section = document.getElementById('bento-proof') || document.body;
+  if ('IntersectionObserver' in window && section !== document.body) {
+    var io = new IntersectionObserver(function(entries, obs){
+      if (entries.some(function(e){ return e.isIntersecting; })) { run(); obs.disconnect(); }
+    }, { threshold: 0.35 });
+    io.observe(section);
+  } else { run(); }
+})();
+</script>
+
 </body>
 </html>

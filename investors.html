@@ -1,53 +1,254 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Investors — Africa Trade Engine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Investors</title>
+  <link rel="icon" href="images/logo/ate-logomark.png" type="image/png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="images/logo/ate-logomark-reverse.png" />
-  <style>html{scroll-behavior:smooth} .container{max-width:72rem;margin:0 auto} .link{color:#A4A39E} .link:hover{color:white}</style>
+  <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest' };</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <style>::-webkit-scrollbar{display:none}</style>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sora:['Sora','sans-serif'], inter:['Inter','sans-serif'] },
+          colors: {
+            'brand-red': { DEFAULT:'#D31414','dark':'#A61617','tint-1':'#DA3737','tint-2':'#E05A5A','tint-3':'#EDA1A1','shade-1':'#B21919','shade-2':'#911F1E' },
+            ink: { darkest:'#0E0F12', dark:'#141518' },
+            neutral: { charcoal:'#2F2F2D', graphite:'#594F50', ash:'#A4A39E', white:'#FFFFFF' }
+          },
+          boxShadow: { 'glow-red':'0 0 40px 0 rgba(224,90,90,.18)', 'glow-red-lg':'0 0 60px 0 rgba(224,90,90,.25)' }
+        }
+      }
+    }
+  </script>
+  <style>
+    .glass-card{background:rgba(20,21,24,.5);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+    .gradient-border{position:relative;border-radius:28px}
+    .gradient-border::before{
+      content:'';position:absolute;inset:0;border-radius:28px;padding:1px;
+      background:linear-gradient(135deg,rgba(211,20,20,.3),rgba(211,20,20,.1),rgba(211,20,20,.3));
+      -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+      -webkit-mask-composite:xor;mask-composite:exclude;
+      pointer-events:none; /* ← ensure overlays never block clicks */
+    }
+    .hero-bg{
+      background-color:#0E0F12;
+      background-image:
+        radial-gradient(at 20% 25%,hsla(0,77%,60%,.20) 0px,transparent 50%),
+        radial-gradient(at 80% 75%,hsla(0,77%,60%,.15) 0px,transparent 50%);
+    }
+  </style>
 </head>
-<body class="bg-[#0E0F12] text-[#A4A39E] font-[Inter]">
-  <header class="sticky top-0 z-50 bg-[#141518]/80 backdrop-blur border-b border-[#594F50]/30">
-    <div class="container flex items-center justify-between px-6 py-3">
-      <a href="index.html" class="flex items-center gap-3 text-white font-[Sora] font-bold">
-        <img src="images/logo/ate-logomark-reverse.png" alt="ATE logo" class="h-7 w-7 rounded" />
+<body class="bg-ink-darkest font-inter text-neutral-ash antialiased">
+
+  <!-- Header -->
+  <header id="header" class="fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50">
+    <nav class="flex items-center justify-between px-6 py-3 bg-ink-dark/50 backdrop-blur-xl rounded-2xl border border-neutral-graphite/30">
+      <a href="index.html" class="flex items-center gap-2 text-neutral-white font-sora font-bold text-lg">
+        <img src="images/logo/ate-logomark-reverse.png" alt="Africa Trade Engine" class="h-6 w-6 rounded"/>
         Africa Trade Engine
       </a>
-      <nav class="hidden md:flex items-center gap-6 text-sm">
-        <a class="link" href="index.html#platform">Platform</a>
-        <a class="link" href="index.html#impact">Impact</a>
-        <a class="link" href="index.html#about-ate">About</a>
-        <a class="link" href="careers.html">Careers</a>
-        <a class="link" href="newsroom.html">Newsroom</a>
-        <a class="link" href="investors.html">Investors</a>
-      </nav>
-      <a href="#contact" class="hidden md:inline-block bg-[#D31414] hover:bg-[#A61617] text-white text-sm px-4 py-2 rounded-full">Start a Project</a>
-    </div>
+      <div class="hidden lg:flex items-center gap-x-8 text-sm font-medium text-neutral-ash">
+        <a href="index.html" class="hover:text-neutral-white transition-colors duration-200">Home</a>
+        <a href="platform.html" class="hover:text-neutral-white transition-colors duration-200">Platform</a>
+        <a href="impact.html" class="hover:text-neutral-white transition-colors duration-200">Impact</a>
+        <a href="about.html" class="hover:text-neutral-white transition-colors duration-200">About</a>
+        <a href="careers.html" class="hover:text-neutral-white transition-colors duration-200">Careers</a>
+        <a href="newsroom.html" class="hover:text-neutral-white transition-colors duration-200">Newsroom</a>
+        <a href="investors.html" class="text-neutral-white font-semibold transition-colors duration-200">Investors</a>
+      </div>
+      <div class="flex items-center gap-4">
+        <button class="hidden lg:flex items-center gap-2 text-sm text-neutral-graphite border border-neutral-graphite/50 px-3 py-1.5 rounded-lg hover:text-neutral-ash hover:border-neutral-ash/50 transition-colors">
+          <i class="fa-solid fa-magnifying-glass"></i><span class="font-mono text-xs">⌘K</span>
+        </button>
+        <a href="start-a-project.html" class="px-5 py-2.5 text-sm font-semibold text-neutral-white bg-brand-red hover:bg-brand-red-dark rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-darkest focus-visible:ring-brand-red-tint-2">
+          Start a Project
+        </a>
+        <button class="lg:hidden text-neutral-ash hover:text-neutral-white">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+    </nav>
   </header>
 
-  <main>
-    <section class="container px-6 py-24">
-      <h1 class="text-white font-[Sora] text-4xl md:text-5xl font-bold mb-4">Investors</h1>
-      <p class="max-w-3xl">High-level metrics and investor relations information. This is a stub page — replace with real content.</p>
+  <main id="main-content">
+    <!-- Hero -->
+    <section id="hero-investors" class="relative hero-bg h-[550px] flex items-center justify-center text-center overflow-hidden">
+      <div class="relative z-10 px-4 max-w-5xl mx-auto">
+        <h1 class="font-sora text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-white leading-tight tracking-tighter">
+          The industrial execution engine for Africa’s next wave of growth.
+        </h1>
+      </div>
     </section>
-    <section id='contact' class='container px-6 pb-24'><h2 class='text-white font-[Sora] text-2xl font-bold mb-3'>Contact IR / Start a Project</h2><p>Drop us a note at <a class='underline' href='mailto:ir@africatradeengine.com'>ir@africatradeengine.com</a> or <a class='underline' href='mailto:hello@africatradeengine.com'>hello@africatradeengine.com</a>.</p></section>
+
+    <!-- Highlights -->
+    <section id="investor-highlights" class="py-24 bg-ink-darkest">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div id="highlight-card-1" class="glass-card gradient-border p-8 rounded-[28px]">
+            <div class="text-brand-red text-3xl mb-4"><i class="fa-solid fa-layer-group"></i></div>
+            <h3 class="font-sora text-2xl font-bold text-neutral-white">Integrated Platform</h3>
+            <p class="mt-3 text-neutral-ash">One partner for production, distribution, and finance, reducing complexity and operational risk.</p>
+          </div>
+          <div id="highlight-card-2" class="glass-card gradient-border p-8 rounded-[28px]">
+            <div class="text-brand-red text-3xl mb-4"><i class="fa-solid fa-eye"></i></div>
+            <h3 class="font-sora text-2xl font-bold text-neutral-white">Demand Visibility</h3>
+            <p class="mt-3 text-neutral-ash">Real-time data from 200k+ retailers provides unparalleled market intelligence and forecasting accuracy.</p>
+          </div>
+          <div id="highlight-card-3" class="glass-card gradient-border p-8 rounded-[28px]">
+            <div class="text-brand-red text-3xl mb-4"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3 class="font-sora text-2xl font-bold text-neutral-white">Defensible Network</h3>
+            <p class="mt-3 text-neutral-ash">Physical assets (plants, hubs) combined with a vast distribution network create a strong competitive moat.</p>
+          </div>
+          <div id="highlight-card-4" class="glass-card gradient-border p-8 rounded-[28px]">
+            <div class="text-brand-red text-3xl mb-4"><i class="fa-solid fa-globe-africa"></i></div>
+            <h3 class="font-sora text-2xl font-bold text-neutral-white">AfCFTA Alignment</h3>
+            <p class="mt-3 text-neutral-ash">Positioned to capitalize on the African Continental Free Trade Area, enabling seamless cross-border trade.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impact KPIs -->
+    <section id="impact-band-investors" class="py-24 bg-ink-dark">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="font-sora text-5xl font-bold text-neutral-white">Quantifiable Impact & ESG</h2>
+          <p class="mt-4 max-w-2xl mx-auto text-lg text-neutral-ash">Driving sustainable growth that benefits the continent, its people, and our partners.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+          <!-- 250,000 t -->
+          <div id="impact-metric-1" class="bg-neutral-charcoal/30 p-8 rounded-2xl">
+            <p class="font-sora text-5xl font-bold text-brand-red-tint-2 inline-flex items-baseline gap-1">
+              <span data-count-up data-target-num="250000">0</span><span>t</span>
+            </p>
+            <h4 class="mt-2 text-xl font-semibold text-neutral-white">CO₂ saved / year</h4>
+            <p class="mt-3 text-neutral-ash">Equivalent to taking ≈55,000 cars off the road annually by localizing production.</p>
+          </div>
+
+          <!-- 12,000 + -->
+          <div id="impact-metric-2" class="bg-neutral-charcoal/30 p-8 rounded-2xl">
+            <p class="font-sora text-5xl font-bold text-brand-red-tint-2 inline-flex items-baseline gap-1">
+              <span data-count-up data-target-num="12000">0</span><span>+</span>
+            </p>
+            <h4 class="mt-2 text-xl font-semibold text-neutral-white">Jobs Created (24 months)</h4>
+            <p class="mt-3 text-neutral-ash">60% youth & 45% women, with 5,000–6,000 indirect jobs per manufacturing node.</p>
+          </div>
+
+          <!-- $ 2 B -->
+          <div id="impact-metric-3" class="bg-neutral-charcoal/30 p-8 rounded-2xl">
+            <p class="font-sora text-5xl font-bold text-brand-red-tint-2 inline-flex items-baseline gap-1">
+              <span>$</span><span data-count-up data-target-num="2">0</span><span>B</span>
+            </p>
+            <h4 class="mt-2 text-xl font-semibold text-neutral-white">Value Retained (5-year)</h4>
+            <p class="mt-3 text-neutral-ash">Keeping capital on the continent with up to 30% cost reduction for local distributors.</p>
+          </div>
+
+          <!-- 600,000 -->
+          <div id="impact-metric-4" class="bg-neutral-charcoal/30 p-8 rounded-2xl">
+            <p class="font-sora text-5xl font-bold text-brand-red-tint-2 inline-flex items-baseline gap-1">
+              <span data-count-up data-target-num="600000">0</span>
+            </p>
+            <h4 class="mt-2 text-xl font-semibold text-neutral-white">SMEs Platformed</h4>
+            <p class="mt-3 text-neutral-ash">Integrating small & medium enterprises into regional trade, boosting local economies.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Downloads -->
+    <section id="investor-downloads" class="py-24 bg-ink-darkest">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="font-sora text-4xl sm:text-5xl font-bold text-neutral-white">Get the Full Picture</h2>
+        <p class="mt-4 text-lg text-neutral-ash">Download our investor resources for a deeper dive into our model, capabilities, and growth strategy.</p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-6">
+          <a href="downloads/ATE-investor-one-pager.pdf" class="w-full sm:w-auto group flex items-center justify-center gap-3 px-6 py-4 text-base font-semibold text-neutral-white bg-transparent border border-neutral-graphite hover:border-neutral-ash hover:bg-white/5 rounded-full transition-colors duration-200">
+            <i class="fa-solid fa-file-arrow-down text-brand-red-tint-2"></i>
+            <span>Download Investor One-Pager</span>
+            <i class="fa-solid fa-arrow-right opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all"></i>
+          </a>
+          <a href="downloads/ATE-capability-sheets.zip" class="w-full sm:w-auto group flex items-center justify-center gap-3 px-6 py-4 text-base font-semibold text-neutral-white bg-transparent border border-neutral-graphite hover:border-neutral-ash hover:bg-white/5 rounded-full transition-colors duration-200">
+            <i class="fa-solid fa-file-invoice text-brand-red-tint-2"></i>
+            <span>Download Capability Sheets</span>
+            <i class="fa-solid fa-arrow-right opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- IR CTA -->
+    <section id="investor-contact-cta" class="py-24 bg-ink-dark">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="font-sora text-4xl sm:text-5xl font-bold text-neutral-white">Connect with our Investor Relations team.</h2>
+        <p class="mt-4 text-lg text-neutral-ash">We're ready to discuss partnership opportunities and answer your questions.</p>
+        <div class="mt-10">
+          <a href="mailto:ir@africatradeengine.com?subject=Investor%20Relations%20Inquiry" class="inline-block px-10 py-5 text-lg font-semibold text-neutral-white bg-brand-red hover:bg-brand-red-dark rounded-full transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-darkest focus-visible:ring-brand-red-tint-2 shadow-glow-red-lg relative z-10">
+            <i class="fa-regular fa-envelope mr-3"></i> Contact IR
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="border-t border-[#594F50]/30 py-10">
-    <div class="container px-6 text-sm flex flex-col md:flex-row items-center justify-between gap-6">
-      <div>© 2025 Africa Trade Engine. All rights reserved.</div>
-      <div class="flex flex-wrap gap-4">
-        <a class="link" href="legal.html">Legal</a>
-        <a class="link" href="privacy.html">Privacy Policy</a>
-        <a class="link" href="cookies.html">Cookies</a>
-        <a class="link" href="downloads/ATE-brochure.pdf">Download Brochure</a>
+  <!-- Footer -->
+  <footer id="footer" class="bg-ink-darkest py-12 border-t border-neutral-graphite/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+        <div class="text-sm text-neutral-graphite">&copy; 2025 Africa Trade Engine. All rights reserved.</div>
+        <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-neutral-ash">
+          <a href="legal.html" class="hover:text-neutral-white transition-colors">Legal</a>
+          <a href="privacy.html" class="hover:text-neutral-white transition-colors">Privacy Policy</a>
+          <a href="cookies.html" class="hover:text-neutral-white transition-colors">Cookies</a>
+          <a href="downloads/ATE-brochure.pdf" class="hover:text-neutral-white transition-colors">Download Brochure</a>
+          <a href="mailto:ir@africatradeengine.com" class="hover:text-neutral-white transition-colors">IR Contact</a>
+        </div>
+        <div class="flex items-center gap-6 text-neutral-ash text-lg">
+          <a href="https://wa.me/" class="hover:text-neutral-white transition-colors" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="book-intro.html" class="hover:text-neutral-white transition-colors"><i class="fa-regular fa-calendar-check"></i></a>
+          <a href="https://www.linkedin.com/" class="hover:text-neutral-white transition-colors" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
       </div>
     </div>
   </footer>
+
+  <!-- Counter (JS-only, reliable) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const run = () => {
+        document.querySelectorAll('[data-count-up]').forEach(el => {
+          const end = parseInt(el.getAttribute('data-target-num') || '0', 10);
+          const dur = 1200;
+          let startTs = null;
+
+          const step = (ts) => {
+            if (!startTs) startTs = ts;
+            const p = Math.min(1, (ts - startTs) / dur);
+            const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+            const val = Math.round(end * eased);
+            el.textContent = val.toLocaleString();
+            if (p < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        });
+      };
+
+      const target = document.getElementById('impact-band-investors');
+      if ('IntersectionObserver' in window && target) {
+        const io = new IntersectionObserver((ents, obs) => {
+          if (ents.some(e => e.isIntersecting)) { run(); obs.disconnect(); }
+        }, { threshold: 0.35 });
+        io.observe(target);
+      } else {
+        run();
+      }
+    });
+  </script>
 </body>
 </html>

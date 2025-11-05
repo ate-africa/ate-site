@@ -18,8 +18,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="images/logo/ate-logomark-reverse.png" />
-  <link rel="apple-touch-icon" href="images/logo/ate-logomark-reverse.png" />
+  <link rel="icon" type="image/png" href="images/logo/ate-logomark.png" />
+  <link rel="apple-touch-icon" href="images/logo/ate-logomark.png" />
 
   <style>
     ::-webkit-scrollbar { display: none; }
@@ -46,7 +46,8 @@
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor; mask-composite: exclude;
-    }
+    
+                pointer-events: none;}
     .hero-bg-platform {
       background-color: #0E0F12;
       background-image:
@@ -258,7 +259,7 @@
         </div>
         <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a href="start-a-project.html" class="w-full sm:w-auto px-6 py-3 text-base font-semibold text-neutral-white bg-transparent border border-neutral-graphite hover:border-neutral-ash hover:bg-white/5 rounded-full transition-colors duration-200">Request Plant Tour</a>
-          <a href="downloads/ATE-brochure.pdf" class="w-full sm:w-auto px-6 py-3 text-base font-semibold text-neutral-white bg-transparent border border-neutral-graphite hover:border-neutral-ash hover:bg-white/5 rounded-full transition-colors duration-200">Download QA Dossier</a>
+          <a href="downloads/ATE-client-brief.pdf" target="_blank" class="w-full sm:w-auto px-6 py-3 text-base font-semibold text-neutral-white bg-transparent border border-neutral-graphite hover:border-neutral-ash hover:bg-white/5 rounded-full transition-colors duration-200">Download Brief</a>
         </div>
       </div>
     </section>
@@ -268,7 +269,7 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div id="mini-case-1" class="group glass-card gradient-border p-6 rounded-[28px] transition-all duration-300 hover:shadow-glow-red hover:-translate-y-1">
-            <p class="text-sm text-neutral-ash">Unilever / Dove</p>
+            <p class="text-sm text-neutral-ash">Unilever | Dove</p>
             <h3 class="font-sora text-xl font-bold text-neutral-white mt-1">Localization Strategy</h3>
             <p class="mt-3 text-sm text-neutral-ash">Achieved a 30% cost reduction by shifting production to our South African facility, improving both margins and market agility.</p>
             <a href="case-dove.html" class="mt-4 inline-block text-sm font-semibold text-brand-red-tint-2 hover:text-neutral-white transition-colors">Learn More <i class="fa-solid fa-arrow-right ml-1 opacity-0 group-hover:opacity-100 transition-opacity"></i></a>
@@ -298,8 +299,8 @@
             <p class="mt-2 text-neutral-ash max-w-xl">Let's discuss your project goals and how Africa Trade Engine can help you execute.</p>
           </div>
           <div class="flex-shrink-0 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-            <a href="start-a-project.html" class="w-full sm:w-auto text-center px-6 py-3 text-base font-semibold text-neutral-white bg-brand-red hover:bg-brand-red-dark rounded-full transition-all duration-200 shadow-glow-red">Start a Project</a>
-            <a href="book-intro.html" class="w-full sm:w-auto text-center px-6 py-3 text-base font-semibold text-neutral-white bg-transparent border border-neutral-graphite hover:border-neutral-ash rounded-full transition-colors duration-200">Book a 20-min Intro</a>
+            <a href="start-a-project.html" class="w-full sm:w-auto text-center px-6 py-3 text-base font-semibold text-neutral-white bg-brand-red hover:bg-brand-red-dark rounded-full transition-all duration-200 shadow-glow-red relative z-10">Start a Project</a>
+            <a href="book-intro.html" class="w-full sm:w-auto text-center px-6 py-3 text-base font-semibold text-neutral-white bg-transparent border border-neutral-graphite hover:border-neutral-ash rounded-full transition-colors duration-200 relative z-10">Book a 20-min Intro</a>
           </div>
         </div>
       </div>
