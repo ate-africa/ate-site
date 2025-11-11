@@ -10,7 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@700&display=swap" rel="stylesheet"/>
   <script>window.FontAwesomeConfig={autoReplaceSvg:"nest"};</script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <!-- Favicon / App icons (uses your provided logo) -->
+
+  <!-- Favicon / App icons -->
   <link rel="icon" type="image/png" href="images/logo/ate-logomark.png" />
   <link rel="apple-touch-icon" href="images/logo/ate-logomark.png" />
 
@@ -33,9 +34,19 @@
   <style>
     .glass-card{background:rgba(20,21,24,.5);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
     .gradient-border{position:relative;border-radius:28px}
-    .gradient-border::before{content:"";position:absolute;inset:0;border-radius:28px;padding:1px;background:linear-gradient(135deg,rgba(211,20,20,.3),rgba(211,20,20,.1),rgba(211,20,20,.3));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
-    .hero-bg{background-color:#0E0F12;background-image:radial-gradient(at 15% 20%, hsla(0,77%,60%,.18) 0px, transparent 50%), radial-gradient(at 85% 70%, hsla(0,77%,60%,.12) 0px, transparent 50%)}
-    .inert{pointer-events:none;user-select:none}
+    .gradient-border::before{
+      content:"";position:absolute;inset:0;border-radius:28px;padding:1px;
+      background:linear-gradient(135deg,rgba(211,20,20,.3),rgba(211,20,20,.1),rgba(211,20,20,.3));
+      -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+      -webkit-mask-composite:xor;mask-composite:exclude;
+      pointer-events:none; /* ensures inner links are clickable */
+    }
+    .hero-bg{
+      background-color:#0E0F12;
+      background-image:
+        radial-gradient(at 15% 20%, hsla(0,77%,60%,.18) 0px, transparent 50%),
+        radial-gradient(at 85% 70%, hsla(0,77%,60%,.12) 0px, transparent 50%)
+    }
   </style>
 </head>
 <body class="bg-ink-darkest font-inter text-neutral-ash antialiased">
@@ -60,7 +71,8 @@
         <button class="hidden lg:flex items-center gap-2 text-sm text-neutral-graphite border border-neutral-graphite/50 px-3 py-1.5 rounded-lg hover:text-neutral-ash hover:border-neutral-ash/50 transition-colors" aria-label="Open command palette">
           <i class="fa-solid fa-magnifying-glass"></i><span class="font-mono text-xs">⌘K</span>
         </button>
-        <a href="start-a-project.html" class="px-5 py-2.5 text-sm font-semibold text-neutral-white bg-brand-red hover:bg-brand-red-dark rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-darkest focus-visible:ring-brand-red-tint-2">
+        <!-- Hide on mobile -->
+        <a href="start-a-project.html" class="hidden sm:inline-flex px-5 py-2.5 text-sm font-semibold text-neutral-white bg-brand-red hover:bg-brand-red-dark rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-darkest focus-visible:ring-brand-red-tint-2">
           Start a Project
         </a>
         <button class="lg:hidden text-neutral-ash hover:text-neutral-white" aria-label="Open menu">
@@ -109,59 +121,28 @@
       </div>
     </section>
 
-    <!-- Open roles -->
+    <!-- Open roles (coming soon) -->
     <section id="open-roles" class="py-24 bg-ink-dark">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="font-sora text-5xl font-bold text-neutral-white">Current Openings</h2>
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="glass-card gradient-border p-10 rounded-[28px] text-center">
+          <div class="mx-auto w-14 h-14 rounded-2xl bg-neutral-charcoal/60 flex items-center justify-center mb-5">
+            <i class="fa-solid fa-circle-notch text-brand-red text-xl"></i>
+          </div>
+
+          <h2 class="font-sora text-4xl font-bold text-neutral-white">Roles coming soon</h2>
           <p class="mt-4 text-lg text-neutral-ash">
-            Find your place at Africa Trade Engine. Can’t find a fit?
-            <a href="https://www.linkedin.com/company/africa-trade-engine-ate/" target="_blank" rel="noopener" class="text-brand-red-tint-2 hover:underline">Connect with us on LinkedIn</a>.
+            We’re finalizing our hiring plan. If you’d like to be considered, send your CV and a short note on where you can add the most value.
           </p>
-        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Role cards (add data-role for modal auto-fill) -->
-          <div class="glass-card gradient-border p-8 rounded-[28px] flex flex-col">
-            <h3 class="font-sora text-2xl font-bold text-neutral-white">Senior Plant Manager</h3>
-            <p class="text-sm text-neutral-ash mt-1">Midrand, South Africa • Full-time</p>
-            <p class="mt-4 text-neutral-ash flex-grow">Lead our flagship facility—drive production efficiency, GMP compliance, and team excellence for global brands.</p>
-            <button data-modal-trigger="apply-modal" data-role="Senior Plant Manager" class="mt-6 w-full px-6 py-3 text-sm font-semibold text-neutral-white bg-brand-red/10 border border-brand-red/50 hover:bg-brand-red/20 rounded-full transition-colors">Quick Apply</button>
-          </div>
-
-          <div class="glass-card gradient-border p-8 rounded-[28px] flex flex-col">
-            <h3 class="font-sora text-2xl font-bold text-neutral-white">Logistics &amp; Supply Chain Lead</h3>
-            <p class="text-sm text-neutral-ash mt-1">Lagos, Nigeria • Full-time</p>
-            <p class="mt-4 text-neutral-ash flex-grow">Design and run our West African flow of goods—optimize dark stores and ensure &gt;98% OTIF.</p>
-            <button data-modal-trigger="apply-modal" data-role="Logistics & Supply Chain Lead" class="mt-6 w-full px-6 py-3 text-sm font-semibold text-neutral-white bg-brand-red/10 border border-brand-red/50 hover:bg-brand-red/20 rounded-full transition-colors">Quick Apply</button>
-          </div>
-
-          <div class="glass-card gradient-border p-8 rounded-[28px] flex flex-col">
-            <h3 class="font-sora text-2xl font-bold text-neutral-white">Data Scientist, Demand Forecasting</h3>
-            <p class="text-sm text-neutral-ash mt-1">Remote (Africa) • Full-time</p>
-            <p class="mt-4 text-neutral-ash flex-grow">Build predictive models that power inventory and distribution for millions of consumers.</p>
-            <button data-modal-trigger="apply-modal" data-role="Data Scientist, Demand Forecasting" class="mt-6 w-full px-6 py-3 text-sm font-semibold text-neutral-white bg-brand-red/10 border border-brand-red/50 hover:bg-brand-red/20 rounded-full transition-colors">Quick Apply</button>
-          </div>
-
-          <div class="glass-card gradient-border p-8 rounded-[28px] flex flex-col">
-            <h3 class="font-sora text-2xl font-bold text-neutral-white">Quality Assurance Manager</h3>
-            <p class="text-sm text-neutral-ash mt-1">Cotonou, Benin • Full-time</p>
-            <p class="mt-4 text-neutral-ash flex-grow">Set up and uphold ISO 22716 from day one at our new SEZ facility.</p>
-            <button data-modal-trigger="apply-modal" data-role="Quality Assurance Manager" class="mt-6 w-full px-6 py-3 text-sm font-semibold text-neutral-white bg-brand-red/10 border border-brand-red/50 hover:bg-brand-red/20 rounded-full transition-colors">Quick Apply</button>
-          </div>
-
-          <div class="glass-card gradient-border p-8 rounded-[28px] flex flex-col">
-            <h3 class="font-sora text-2xl font-bold text-neutral-white">Commercial Partnership Director</h3>
-            <p class="text-sm text-neutral-ash mt-1">Nairobi, Kenya • Full-time</p>
-            <p class="mt-4 text-neutral-ash flex-grow">Lead East Africa expansion—forge partnerships with brands localizing production and distribution.</p>
-            <button data-modal-trigger="apply-modal" data-role="Commercial Partnership Director" class="mt-6 w-full px-6 py-3 text-sm font-semibold text-neutral-white bg-brand-red/10 border border-brand-red/50 hover:bg-brand-red/20 rounded-full transition-colors">Quick Apply</button>
-          </div>
-
-          <div class="glass-card gradient-border p-8 rounded-[28px] flex flex-col">
-            <h3 class="font-sora text-2xl font-bold text-neutral-white">Software Engineer, Platform</h3>
-            <p class="text-sm text-neutral-ash mt-1">Remote (Africa) • Full-time</p>
-            <p class="mt-4 text-neutral-ash flex-grow">Build the tech that provides end-to-end visibility—from intake to retail sale.</p>
-            <button data-modal-trigger="apply-modal" data-role="Software Engineer, Platform" class="mt-6 w-full px-6 py-3 text-sm font-semibold text-neutral-white bg-brand-red/10 border border-brand-red/50 hover:bg-brand-red/20 rounded-full transition-colors">Quick Apply</button>
+          <div class="mt-8">
+            <a
+              href="mailto:careers@ate.africa?subject=CV%20Submission%20%E2%80%94%20[Role%20Area]&body=Hi%20ATE%20team%2C%0A%0AI%E2%80%99m%20interested%20in%20future%20roles.%20Links%3A%20[LinkedIn%2FPortfolio].%0A%0ABest%2C%0A[Name]"
+              class="relative z-10 inline-flex items-center justify-center gap-2 px-7 py-4 text-base font-semibold text-brand-red-tint-2 border border-brand-red/50 hover:bg-brand-red/10 rounded-full transition-colors"
+              aria-label="Email careers@ate.africa to share your CV"
+              title="Email careers@ate.africa">
+              <i class="fa-regular fa-envelope"></i>
+              <span>Share your CV</span>
+            </a>
           </div>
         </div>
       </div>
@@ -188,7 +169,7 @@
           <a href="privacy.html" class="hover:text-neutral-white transition-colors">Privacy Policy</a>
           <a href="cookies.html" class="hover:text-neutral-white transition-colors">Cookies</a>
           <a href="downloads/brochure.pdf" class="hover:text-neutral-white transition-colors">Download Brochure</a>
-          <a href="mailto:ir@africatradeengine.com" class="hover:text-neutral-white transition-colors">IR Contact</a>
+          <a href="mailto:ir@ate.africa" class="hover:text-neutral-white transition-colors">IR Contact</a>
         </div>
         <div class="flex items-center gap-6 text-neutral-ash text-lg">
           <a href="https://wa.me/16282502600/" target="_blank" rel="noopener" class="hover:text-neutral-white transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
@@ -198,98 +179,5 @@
       </div>
     </div>
   </footer>
-
-  <!-- Quick Apply Modal (Netlify-ready) -->
-  <div id="apply-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-ink-darkest/80 backdrop-blur-sm p-4" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-    <div id="modal-panel" class="relative glass-card gradient-border w-full max-w-lg rounded-[28px] p-8 shadow-2xl transition-all duration-200 transform scale-95 opacity-0">
-      <button data-modal-close="apply-modal" class="absolute top-6 right-6 text-neutral-graphite hover:text-neutral-white transition-colors" aria-label="Close">
-        <i class="fa-solid fa-times text-xl"></i>
-      </button>
-      <h3 id="modal-title" class="font-sora text-2xl font-bold text-neutral-white">Apply for this role</h3>
-      <p class="mt-2 text-neutral-ash" id="modal-role-hint">Submit your details or apply via LinkedIn.</p>
-
-      <!-- Netlify form -->
-      <form name="quick-apply" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" action="/thanks.html" class="mt-6 space-y-4">
-        <!-- required hidden for Netlify -->
-        <input type="hidden" name="form-name" value="quick-apply"/>
-        <input type="hidden" id="role" name="role" value=""/>
-        <p class="hidden">
-          <label>Don’t fill this out: <input name="bot-field"/></label>
-        </p>
-
-        <div>
-          <label for="name" class="text-sm font-medium text-neutral-ash">Full Name</label>
-          <input type="text" id="name" name="name" required class="mt-1 block w-full bg-ink-dark border border-neutral-graphite/50 rounded-lg px-4 py-2.5 text-neutral-white focus:ring-2 focus:ring-brand-red-tint-2 focus:border-brand-red-tint-2 outline-none transition"/>
-        </div>
-        <div>
-          <label for="email" class="text-sm font-medium text-neutral-ash">Email</label>
-          <input type="email" id="email" name="email" required class="mt-1 block w-full bg-ink-dark border border-neutral-graphite/50 rounded-lg px-4 py-2.5 text-neutral-white focus:ring-2 focus:ring-brand-red-tint-2 focus:border-brand-red-tint-2 outline-none transition"/>
-        </div>
-        <div>
-          <label for="file-upload" class="text-sm font-medium text-neutral-ash">Resume/CV</label>
-          <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-neutral-graphite/50 border-dashed rounded-lg">
-            <div class="space-y-1 text-center">
-              <i class="fa-solid fa-cloud-arrow-up mx-auto h-12 w-12 text-neutral-graphite"></i>
-              <div class="flex text-sm text-neutral-ash items-center justify-center gap-1">
-                <span class="font-medium text-brand-red-tint-2">Upload a file</span><span>or drag and drop</span>
-              </div>
-              <p class="text-xs text-neutral-graphite">PDF, DOCX up to 10MB</p>
-              <input id="file-upload" name="resume" type="file" accept=".pdf,.doc,.docx" class="mt-3 block w-full text-sm text-neutral-ash"/>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex flex-col sm:flex-row items-center gap-4 pt-2">
-          <button type="submit" class="w-full sm:w-auto flex-1 px-6 py-3 text-base font-semibold text-neutral-white bg-brand-red hover:bg-brand-red-dark rounded-full transition-colors">Submit Application</button>
-          <a href="https://www.linkedin.com/company/africa-trade-engine-ate/jobs/" target="_blank" rel="noopener" class="w-full sm:w-auto flex-1 px-6 py-3 text-base font-semibold text-neutral-white bg-[#0077B5] hover:bg-[#005E92] rounded-full transition-colors flex items-center justify-center gap-2">
-            <i class="fa-brands fa-linkedin-in"></i> Apply with LinkedIn
-          </a>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const modal = document.getElementById("apply-modal");
-      const panel = document.getElementById("modal-panel");
-      const roleInput = document.getElementById("role");
-      const roleHint = document.getElementById("modal-role-hint");
-
-      const openModal = (roleName = "") => {
-        roleInput.value = roleName || "";
-        roleHint.textContent = roleName ? `Applying for: ${roleName}` : "Submit your details or apply via LinkedIn.";
-        modal.classList.remove("hidden");
-        document.body.classList.add("inert");
-        requestAnimationFrame(() => {
-          panel.classList.remove("scale-95","opacity-0");
-          panel.classList.add("scale-100","opacity-100");
-        });
-      };
-
-      const closeModal = () => {
-        panel.classList.remove("scale-100","opacity-100");
-        panel.classList.add("scale-95","opacity-0");
-        setTimeout(() => {
-          modal.classList.add("hidden");
-          document.body.classList.remove("inert");
-        }, 200);
-      };
-
-      document.querySelectorAll("[data-modal-trigger]").forEach(btn => {
-        btn.addEventListener("click", () => openModal(btn.getAttribute("data-role") || ""));
-      });
-
-      document.querySelectorAll("[data-modal-close]").forEach(btn => {
-        btn.addEventListener("click", closeModal);
-      });
-
-      // close on backdrop
-      modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
-
-      // close on Esc
-      document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !modal.classList.contains("hidden")) closeModal(); });
-    });
-  </script>
 </body>
 </html>
