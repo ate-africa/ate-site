@@ -12,7 +12,7 @@ plus stub pages so all links resolve.
 - careers.html
 - newsroom.html
 - investors.html (has `#contact` anchor for IR)
-- book-intro.html
+- mailto:hello@ate.africa?subject=Book%20a%2020-min%20Intro
 - contact.html
 - legal.html
 - privacy.html
